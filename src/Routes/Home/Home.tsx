@@ -1,8 +1,13 @@
+import mobileLogo from "../../assets/Logomobile.png"
+import "../Home/home.scss"
+
 const Home = () => {
 	return (
-		<>
-		<div>Välkommen</div>
-		</>
+		<div className="container">
+			<div>
+				<img src= {mobileLogo} />
+			</div>
+		</div>
 	)
 }
 
