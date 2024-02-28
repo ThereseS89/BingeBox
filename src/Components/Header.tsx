@@ -1,3 +1,5 @@
+import './Stylesheets/header.scss'
+
 const Header = () => {
 	return (
 		<>
