@@ -1,3 +1,51 @@
+@import "../../index.scss";
+
 header {
-	height: 30%;
+	height: 8%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: $background;
+	padding: 1rem;
+
+	.nav-hamburger {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 30px;
+		height: 20px;
+		cursor: pointer;
+
+		.line {
+			height: 3px;
+			width: 100%;
+			background-color: $text;
+			border-radius: 1rem;
+		}
+	}
+
+	h4 {
+		font-family: $fontLogo;
+		color: $yellow;
+
+		span {
+			color: $green;
+		}
+	}
+	.user-container {
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		border: 2px solid $green;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		p {
+			color: $text;
+			font-family: $fontBell;
+		}
+	}
 }
+
