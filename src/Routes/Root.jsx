@@ -3,7 +3,7 @@ import Header from "../Components/Header"
 import Footer from "../Components/Footer"
 import HomeOverlay from "../Components/HomeOverlay"
 import {useState, useEffect} from "react"
-import '../../src/index.css'
+import '../../src/index.scss'
 
 
 const Root = () => {

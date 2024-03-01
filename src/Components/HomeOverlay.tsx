@@ -1,4 +1,4 @@
-import mobileLogo from "../assets/Logomobile.png"
+import mobileLogo from "../assets/imgs/Logomobile.png"
 import './Stylesheets/homeOverlay.scss'
 
 interface homeOverlayProps {
