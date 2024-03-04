@@ -28,6 +28,11 @@ $fontLogo: 'Galindo', cursive;
 $fontBar: 'barlow', sans-serif;
 $fontBell: 'Bellefair', serif;
 $fontBarCon: 'barlow condensed', sans-serif;
+$bigLetterSpace: 4.72px;
+$smallLetterSpace: 2.7px;
+$textSizeBig: 1.5rem;
+$textSizeSmall: 1.3em;
+
 
 // 03 Classes
 
@@ -83,6 +88,14 @@ p {
       margin-bottom: 0;
     }
 
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none;
 }
 
 body {

@@ -1,0 +1,34 @@
+@import '../../index.scss';
+
+.hamburger-menu {
+	height: 100%;
+	width: 70%;
+	background-color: $background;
+	color: $yellow;
+	position: absolute;
+	top: 8%;
+	z-index: 1;
+	transition: all 1s ease-in-out;
+	
+
+	ul {
+		margin-left: 1em;
+
+		li {
+		font-family: $fontBarCon;
+		letter-spacing: $smallLetterSpace;
+		font-size: $textSizeSmall;
+		list-style: none;
+		margin-top: 1em;	
+		}
+
+		:nth-last-child(1) {
+			position: absolute;
+			bottom: 10%;
+			color: $text;
+		}
+	}
+
+	
+	
+}

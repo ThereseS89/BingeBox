@@ -4,10 +4,13 @@ import Footer from "../Components/Footer"
 import HomeOverlay from "../Components/HomeOverlay"
 import {useState, useEffect} from "react"
 import '../../src/index.scss'
+import HamburgerMenu from "../Components/Hamburgermenu"
+
 
 
 const Root = () => {
 	const [isOverlayVisible, setIsOverlayVisible]= useState(true)
+	
 	
 	useEffect(() => {
 		setIsOverlayVisible(true);
@@ -23,6 +26,7 @@ const Root = () => {
 		{isOverlayVisible ? <HomeOverlay isOverlay={true}/> : null }
 		{!isOverlayVisible ? <Header /> : null }
 		<main>
+			<HamburgerMenu />
 			
 			<Outlet />
 		</main>
