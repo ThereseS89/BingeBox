@@ -1,0 +1,56 @@
+@import '../../index.scss';
+
+
+.search-page {
+	background-color: $background;
+	background: linear-gradient(360deg, rgba(0,0,0,1) 35%, rgba(41,41,41,1) 51%);
+	color: $text;
+	padding-top: 1em;
+	padding: 1em;
+	height: 100%;
+	word-break: break-word;
+	
+
+	* {
+		margin-top: 0.5em;
+	}
+
+	.search-text {
+		margin-left: 0.5em;
+	}
+
+	.input-container {
+		position: relative;
+
+		input {
+			padding-left: 2em;
+		}
+
+		.search-icon {
+		position: absolute;
+		top: 50%;
+		left: 17px;
+	}
+	}
+
+	.search-result-container  {
+		display: flex;
+		flex-direction: row;
+		gap: 1em;
+		align-items: stretch;
+		overflow-y: hidden;
+		scrollbar-width: none;
+
+
+		div {
+			display: flex;
+			flex-direction: column;
+			word-wrap: break-word;
+			width: 128px;
+		}
+		
+	}
+	
+	
+
+}

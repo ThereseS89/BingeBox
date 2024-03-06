@@ -2,18 +2,19 @@
 
 footer {
 	background-color: black;
-	height: 8%;
+	width: 100vw;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 1em;
+	position: fixed;
+	bottom: 0;
 
 	.socialmedia-container {
 		color: $text;
 		display: flex;
 		gap: 0.5em;
 	}
-	
 
 	.logo-container {
 		text-align: end;
@@ -33,6 +34,7 @@ footer {
 	}
 	
 	}
+
 	.year {
 		font-size: 10px;
 		margin: 0;
