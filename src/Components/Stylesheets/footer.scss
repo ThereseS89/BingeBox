@@ -1,3 +1,44 @@
+@import '../../index.scss';
+
 footer {
+	background-color: black;
 	height: 8%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+
+	.socialmedia-container {
+		color: $text;
+		display: flex;
+		gap: 0.5em;
+	}
+	
+
+	.logo-container {
+		text-align: end;
+		display: flex;
+		flex-direction: column;	
+
+		.logotext	{
+		font-family: $fontLogo;
+		color: $yellow;
+		margin: 0;
+		height: 15px;
+	
+
+		span {
+			color: $green;
+		}
+	}
+	
+	}
+	.year {
+		font-size: 10px;
+		margin: 0;
+		color: $text;
+	}
+	
+
+	
 }
