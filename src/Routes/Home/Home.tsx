@@ -1,23 +1,62 @@
+import {movieData} from "../../assets/data/testdata";
+import { tvshowData } from "../../assets/data/testdata.js";
+import  aquaman  from "../../assets/imgs/Aquaman.jpeg"
 
 import "../Home/home.scss"
 
 const Home = () => {
+	console.log(movieData, 'MOVIEDATA', tvshowData, 'TVSHOW')
+	movieData.forEach((movie) => {
+		console.log('image:' , movie.Image)
+	})
+
+
 	return (
-		<div className="container">
-			
-			<div className="card">
-				<img></img>
-				<h4>INCEPTION</h4>
-				<div className="info-container">
-					<p>Thriller</p><p>2H 57MIN</p> <p>13+</p><p>2012</p>
+		<div className="home">
+			<div className="banner">
+				<div className="banner-img-container">
+					<img src={aquaman} />
 				</div>
-				<div className="utils-container">
-					<div><span>plus</span><span>bock</span></div>
-					<div className="stars">stjärnor</div>
-				</div>
-				<p>Ut justo. Suspendisse potenti.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi</p>
-				<div className="actorInfo-container"><p>SKÅDESPELARE</p><p>Leonordo Dicaprio, Olle Jönsson, Leonardo Dicaprio</p></div>
+				<div className="dot-indicators flex">
+							<button></button>
+							<button></button>
+							<button></button>
+						</div>
 			</div>
+
+			<h5 className="uppercase">Filmer</h5>
+			<div className="media-container">
+				
+				{movieData.map((movie, index) => (
+				<div key={index} >
+					<img className="movie-img" src={movie.Image} alt={movie.Name} />
+				</div>
+				))}
+			</div>
+			
+			
+			<h5 className="uppercase">Tv-serier</h5>	
+			<div className="media-container">
+				
+				{tvshowData.map((tvshow, index) => (
+				<div key={index} >
+					<img className="movie-img" src={tvshow.Image}></img>
+				</div>
+				))}
+				
+			</div>
+
+			<h5 className="uppercase">Populärt</h5>
+			<div className="media-container">
+				
+				
+				{tvshowData.map((tvshow, index) => (
+				<div key={index} >
+					<img className="movie-img" src={tvshow.Image}></img>
+				</div>
+				))}
+			</div>	
+			
 		</div>
 	)
 }

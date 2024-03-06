@@ -1,5 +1,56 @@
 @import "../../index.scss";
 
-main {
+
+.home {
 	background-color: $background;
+	background: linear-gradient(360deg, rgba(0,0,0,1) 35%, rgba(41,41,41,1) 51%);
+	color: $text;
+	height: 84%;
+	padding-top: 1em;
+
+	.banner {
+		width: 100%;
+		height: 8em;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.banner-img-container {
+			width: 100%;
+			height: 100%;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.dot-indicators {
+			display: flex;
+			gap: 0.5em;
+			align-items: center;
+			padding-top: 0.5em;
+		}
+		
+	}
+
+	h5 {
+		font-weight: 300;
+		padding-top: 1em;
+		padding-bottom: 0.5rem;
+	}
+
+	.media-container {
+		display: flex;
+		justify-content: space-between;
+		// tillfällig inställning - ser inte bra ut!
+		overflow-y: scroll;
+		
+		
+		div {
+			margin-right: 1em;
+			margin-left: 1em;
+		}
+	}
 }
