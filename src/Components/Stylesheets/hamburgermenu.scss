@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import '../../variables.scss';
 
 .hamburger-menu {
 	height: 100%;
@@ -13,6 +13,11 @@
 
 	ul {
 		margin-left: 1em;
+		padding-bottom: 1em;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		height: 90%;
 
 		li {
 		font-family: $fontBarCon;
@@ -20,15 +25,16 @@
 		font-size: $textSizeSmall;
 		list-style: none;
 		margin-top: 1em;	
+		color: $yellow;
 		}
 
-		:nth-last-child(1) {
-			position: absolute;
-			bottom: 10%;
+
+		.position-bottom {
+			margin-top: auto;
 			color: $text;
+		}
 		}
 	}
 
 	
 	
-}

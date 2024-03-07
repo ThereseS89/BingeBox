@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bellefair&display=swap');
+@import './variables.scss';
 
 * {
   margin: 0;
@@ -15,12 +16,11 @@ html {
 }
 
 #root {
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
-
 }
 
 
@@ -38,35 +38,18 @@ select {
 }
 
 
-// 01 Color - variables
-$green: #23B856;
-$yellow: #FFE815;
-$background: #292929;
-$text: #FFFFFF;
-$hovergreen: #67A981;
-$hoveryellow: #fff59C;
-
-// 02 Typography
-$fontLogo: 'Galindo', cursive;
-$fontBar: 'Barlow', sans-serif;
-$fontBell: 'Bellefair', serif;
-$fontBarCon: 'Barlow condensed', sans-serif;
-$bigLetterSpace: 4.72px;
-$smallLetterSpace: 2.7px;
-$textSizeBig: 1.5rem;
-$textSizeSmall: 1.3em;
 
 // 03 Classes
 
 body {
   width: 100%;
-  min-height: 100vh;
+  min-height: 100svh;
   font-family: $fontBar;
 }
 
 main {
   height: 100%;
-  padding-bottom: 70px;
+  padding-bottom: 7em;
 }
 
 

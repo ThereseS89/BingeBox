@@ -1,14 +1,34 @@
-import {movieData} from "../../assets/data/testdata";
+import { movieData } from "../../assets/data/testdata";
 import { tvshowData } from "../../assets/data/testdata.js";
 import  aquaman  from "../../assets/imgs/Aquaman.jpeg"
+// import { getTrendingMovies } from '../../APIFunctions/getMovies.js'
+// import { getTrendingTvShows } from "../../APIFunctions/getTvshows";
+// import { useEffect, useState } from "react";
+// import { Movie } from '../../types'
+// import { urlImage } from "../../constants/constants";
 
 import "../Home/home.scss"
 
+
 const Home = () => {
-	console.log(movieData, 'MOVIEDATA', tvshowData, 'TVSHOW')
-	movieData.forEach((movie) => {
-		console.log('image:' , movie.Image)
-	})
+	// const [movieDatai, setMovieDatai] = useState<Movie[] | null>(null)
+	// const [TVData, setTVData] = useState<Movie[] | null>(null)
+
+	// useEffect(() => {
+		
+	// 	async function fetchData() {
+	// 	const trendingMovieData = await getTrendingMovies();
+	// 	const trendigTVData = await getTrendingTvShows()
+			
+			
+	// 		console.log('DATA:', trendingMovieData, movieDatai)
+	// 		setMovieDatai(trendingMovieData)
+	// 		setTVData(trendigTVData)
+	// 	}
+	// 	fetchData()
+	// },[]);
+
+	
 
 
 	return (
@@ -26,8 +46,8 @@ const Home = () => {
 
 			<h5 className="uppercase">Filmer</h5>
 			<div className="media-container">
-				
-				{movieData.map((movie, index) => (
+				{ /* {movieDatai !== null }*/}
+				{movieData.map((movie, index) => ( 
 				<div key={index} >
 					<img className="movie-img" src={movie.Image} alt={movie.Name} />
 				</div>
@@ -37,7 +57,7 @@ const Home = () => {
 			
 			<h5 className="uppercase">Tv-serier</h5>	
 			<div className="media-container">
-				
+				{/* TVData !== null && TVData */}
 				{tvshowData.map((tvshow, index) => (
 				<div key={index} >
 					<img className="movie-img" src={tvshow.Image}></img>

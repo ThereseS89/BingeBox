@@ -1,11 +1,10 @@
-@import "../../index.scss";
+@import "../../variables.scss";
 
 
 .home {
 	background-color: $background;
 	background: linear-gradient(360deg, rgba(0,0,0,1) 35%, rgba(41,41,41,1) 51%);
 	color: $text;
-	height: 84%;
 	padding-top: 1em;
 
 	.banner {
@@ -39,6 +38,7 @@
 		font-weight: 300;
 		padding-top: 1em;
 		padding-bottom: 0.5rem;
+		padding-left: 1em;
 	}
 
 	.media-container {

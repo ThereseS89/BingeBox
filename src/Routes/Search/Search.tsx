@@ -8,6 +8,7 @@ const Search = () => {
 	
 	const [searching, setSearching] = useState(false);
 	const [matchedMedia, setMatchedMedia ] = useState<{ Name: string; Genre: string; Duration: string; PremiereYear: number; ShortDescription: string; Actors: string[]; Image: string; }[]>([])
+	
 	const searchFunction = (event: { target: { value: string} }) => {
 		const searchString: string = event.target.value.toLowerCase();
 		const filteredMovies = mediaData.filter((media) => {
