@@ -1,6 +1,7 @@
 import './Stylesheets/header.scss'
 import { useRecoilState } from 'recoil'
 import { showNavState } from '../Utils/atoms'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
 	const [showNav, setShowNav] = useRecoilState<boolean>(showNavState)
@@ -25,8 +26,8 @@ const Header = () => {
 				<div className='line l3'></div>
 
 			</div>
-			<h4>Binge<span>Box</span></h4>
-			<div className='user-container'><p>T</p></div>
+			<NavLink to="/"><h4>Binge<span>Box</span></h4></NavLink>
+			<NavLink to="/myPage"><div className='user-container'><p>T</p></div></NavLink>
 			
 		</header>
 	)

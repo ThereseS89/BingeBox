@@ -14,7 +14,7 @@ const HamburgerMenu = () => {
 		<div className={showNav ? 'hamburger-menu' : 'hidden'}>
 			<ul>
 				<li className="uppercase"><NavLink to="/search">Sök</NavLink></li>
-				<li className="uppercase"><NavLink to="">Tv-serier</NavLink></li>
+				<li className="uppercase"><NavLink to="/">Hem</NavLink></li>
 				<li className="uppercase"><NavLink to="">Populärt Just nu</NavLink></li>
 				<li className="uppercase"><NavLink to="">Genrer</NavLink></li>
 				<li className="uppercase"><NavLink to="">Om Oss</NavLink></li>

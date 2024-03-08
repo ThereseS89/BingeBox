@@ -14,3 +14,15 @@ export const showNavState = atom ({
 	key: 'showNavState',
 	default: false,
 })
+
+export const myListState = atom ({
+	key: 'myListState',
+	default: []
+}) 
+
+export const watchedMediaState = atom ({
+	key: 'watchedMediaState',
+	default: [],
+}) 
+
+ 

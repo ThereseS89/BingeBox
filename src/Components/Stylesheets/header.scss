@@ -8,6 +8,10 @@ header {
 	background-color: $background;
 	padding: 1rem;
 
+	a {
+		text-decoration: none;
+	}
+
 	.nav-hamburger {
 		display: flex;
 		flex-direction: column;
@@ -49,21 +53,6 @@ header {
 			color: $green;
 		}
 	}
-	.user-container {
-		width: 2rem;
-		height: 2rem;
-		border-radius: 50%;
-		border: 2px solid $green;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		cursor: pointer;
-
-		p {
-			color: $text;
-			font-family: $fontBell;
-			
-		}
-	}
+	
 }
 

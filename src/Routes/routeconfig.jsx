@@ -6,6 +6,7 @@ import Login from "./Login/Login"
 import MyPage from "./MyPage/MyPage"
 import ErrorPage from "./ErrorPage/ErrorPage"
 import MediaPage from "./MediaPage/MediaPage"
+import AboutUs from "./AboutUs/AboutUs"
 
 const router = createBrowserRouter([
 	{
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
 			{
 				path: "mediaPage",
 				element: <MediaPage />
+			},
+			{
+				path: "aboutUs",
+				element: <AboutUs />
 			}
 		],
 		errorElement: <ErrorPage />
