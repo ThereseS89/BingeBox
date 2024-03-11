@@ -8,17 +8,19 @@ import './Stylesheets/hamburgermenu.scss'
 const HamburgerMenu = () => {
 	const [isLoggedIn, setIsloggedIn] = useRecoilState<boolean>(isLoggedInState) 
 	const [showNav, setShowNav] = useRecoilState<boolean>(showNavState)
-	
+	const handleLinkClick = () => {
+		setShowNav(false)
+	}
 
 	return (
 		<div className={showNav ? 'hamburger-menu' : 'hidden'}>
 			<ul>
-				<li className="uppercase"><NavLink to="/search">Sök</NavLink></li>
-				<li className="uppercase"><NavLink to="/">Hem</NavLink></li>
-				<li className="uppercase"><NavLink to="">Populärt Just nu</NavLink></li>
-				<li className="uppercase"><NavLink to="">Genrer</NavLink></li>
-				<li className="uppercase"><NavLink to="">Om Oss</NavLink></li>
-				{!isLoggedIn ? <li className="uppercase position-bottom"><NavLink to="">logga in</NavLink></li> : <li className="uppercase">Min sida</li>}
+				<li onClick={handleLinkClick} className="uppercase"><NavLink to="/search" className="fontyellow">Sök</NavLink></li>
+				<li onClick={handleLinkClick} className="uppercase"><NavLink to="/" className="fontyellow">Hem</NavLink></li>
+				<li onClick={handleLinkClick} className="uppercase"><NavLink to="" className="fontyellow">Populärt Just nu</NavLink></li>
+				<li onClick={handleLinkClick} className="uppercase"><NavLink to="" className="fontyellow">Genrer</NavLink></li>
+				<li onClick={handleLinkClick} className="uppercase fontyellow"><NavLink to="/aboutUs" className="fontyellow">Om Oss</NavLink></li>
+				{!isLoggedIn ? <li className="uppercase position-bottom fontyellow"><NavLink to="" className="fontyellow">logga in</NavLink></li> : <li className="uppercase font">Min sida</li>}
 				
 			</ul>
 		</div>

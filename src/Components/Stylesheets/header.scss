@@ -19,30 +19,28 @@ header {
 		width: 30px;
 		height: 20px;
 		cursor: pointer;
-		transition: all 1s ease-in-out;
+		transition: transform 2s ease-in-out;
 
 		.line {
 			height: 3px;
 			width: 100%;
 			background-color: $text;
 			border-radius: 1rem;
-		
-
-			.line.l1 {
-					background-color: hotpink;
-					transform: translateY(8px) rotate(45deg);
-				}
-				.l2 {
-					opacity: 0;
-				}
-				.l3 {
-					transform: translate(-8px) rotate(-45deg);
-				}
-
-			
 		}
 	}
+						
+		.opacity {
+			opacity: 0;
+		}
 
+		.rotate {
+			transform: translateY(9px) rotate(45deg);
+		}
+
+		.rotateB {
+			transform: translateY(-8px) rotate(-45deg);
+		} 
+	
 	
 
 	h4 {

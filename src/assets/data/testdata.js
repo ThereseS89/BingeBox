@@ -14,7 +14,7 @@ import theshawshankredemption from "../imgs/theshawshankredemption.jpg";
 
 
 export const tvshowData =  [
-    {
+    {       id: 0,
             Name: "Game of Thrones",
             Genre: "Action, Adventure, Drama",
             Duration: "57 min",
@@ -24,6 +24,7 @@ export const tvshowData =  [
             Image: gameofthrones
     },
     {
+            id: 1,
             Name: "Friends",
             Genre: "Comedy, Romance",
             Duration: "22 min",
@@ -33,6 +34,7 @@ export const tvshowData =  [
             Image: friends
     },
     {
+            id: 2,
             Name: "Black Mirror",
             Genre: "Drama, Sci-Fi, Thriller",
             Duration: "60 min",
@@ -42,6 +44,7 @@ export const tvshowData =  [
             Image: blackmirror
     },
     {
+            id: 3,
             Name: "Stranger Things",
             Genre: "Drama, Fantasy, Horror",
             Duration: "51 min",
@@ -51,6 +54,7 @@ export const tvshowData =  [
             Image: strangerthings
     }, 
     {
+            id: 4,
             Name: "Breaking Bad",
             Genre: "Crime, Drama, Thriller",
             Duration: "49 min",
@@ -60,6 +64,7 @@ export const tvshowData =  [
             Image: breakingbad
     },
     {
+            id: 5,
             Name: "The Crown",
             Genre: "Biography, Drama, History",
             Duration: "58 min",
@@ -68,7 +73,7 @@ export const tvshowData =  [
             Actors: ["Claire Foy", "Olivia Colman", "Imelda Staunton"],
             Image: breakingbad
     },
-    {
+    {       id:  6,
             Name: "The Office (US)",
             Genre: "Comedy",
             Duration: "22 min",
@@ -77,7 +82,7 @@ export const tvshowData =  [
             Actors: ["Steve Carell", "Jenna Fischer", "John Krasinski"],
             Image: theoffice
     },
-    {
+    {       id: 7,
             Name: "The Sopranos",
             Genre: "Crime, Drama",
             Duration: "55 min",
@@ -86,7 +91,7 @@ export const tvshowData =  [
             Actors: ["James Gandolfini", "Lorraine Bracco", "Edie Falco"],
             Image: breakingbad
     },
-    {
+    {       id: 8,
             Name: "The Simpsons",
             Genre: "Animation, Comedy",
             Duration: "22 min",
@@ -98,7 +103,7 @@ export const tvshowData =  [
 ]
 
 export const movieData = [
-        {
+        {   id: 9,
             Name: "Inception",
             Genre: "Action, Adventure, Sci-Fi",
             Duration: "148 min",
@@ -107,7 +112,7 @@ export const movieData = [
             Actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
             Image: inception
         },
-        {
+        {   id: 10,
             Name: "Pulp Fiction",
             Genre: "Crime, Drama",
             Duration: "154 min",
@@ -117,6 +122,7 @@ export const movieData = [
             Image: pulpfiction
         },
         {
+            id: 11,
             Name: "The Godfather",
             Genre: "Crime, Drama",
             Duration: "175 min",
@@ -125,7 +131,7 @@ export const movieData = [
             Actors: ["Marlon Brando", "Al Pacino", "James Caan"],
             Image: gudfadern
         },
-        {
+        {   id: 12,
             Name: "The Dark Knight",
             Genre: "Action, Crime, Drama",
             Duration: "152 min",
@@ -135,6 +141,7 @@ export const movieData = [
             Image: thedarknight
         },
         {
+            id: 13,
             Name: "Forrest Gump",
             Genre: "Drama, Romance",
             Duration: "142 min",
@@ -144,6 +151,7 @@ export const movieData = [
             Image: forestgump
         },
         {
+            id: 14,
             Name: "The Shawshank Redemption",
             Genre: "Drama",
             Duration: "142 min",
@@ -153,6 +161,7 @@ export const movieData = [
             Image: theshawshankredemption
         },
         {
+            id: 15,
             Name: "The Matrix",
             Genre: "Action, Sci-Fi",
             Duration: "136 min",
@@ -161,7 +170,7 @@ export const movieData = [
             Actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
             Image: thematrix
         },
-        {
+        {   id: 16,
             Name: "The Lord of the Rings Trilogy",
             Genre: "Action, Adventure, Drama",
             Duration: "558 min",
@@ -170,7 +179,7 @@ export const movieData = [
             Actors: ["Elijah Wood", "Ian McKellen", "Orlando Bloom"],
             Image: thematrix
         },
-        {
+        {   id: 17,
             Name: "Harry Potter and the Philosopher's Stone",
             Genre: "Adventure, Family, Fantasy",
             Duration: "152 min",
@@ -180,6 +189,7 @@ export const movieData = [
             Image: breakingbad
         },
         {
+            id: 18,
             Name: "Interstellar",
             Genre: "Adventure, Drama, Sci-Fi",
             Duration: "169 min",
@@ -188,7 +198,7 @@ export const movieData = [
             Actors: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"],
             Image: inception
         },
-        {
+        {   id: 19,
             Name: "Avengers: Endgame",
             Genre: "Action, Adventure, Sci-Fi",
             Duration: "181 min",

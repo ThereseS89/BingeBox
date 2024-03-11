@@ -14,3 +14,21 @@ export interface Movie {
 	vote_average: number;
 	vote_count: number;
   }
+
+export interface Media {
+	id: number;
+    Name: string;
+    Genre: string;
+    Duration: string;
+    PremiereYear: number;
+    ShortDescription: string;
+    Actors: string[];
+    Image: string;
+}
+
+export interface myListMovie {
+	id: number;
+	media_type: string;
+	poster_path: string;
+	title: string;
+}

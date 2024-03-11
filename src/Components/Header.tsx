@@ -21,9 +21,9 @@ const Header = () => {
 			<div onClick={handleClickNav}
 				className='nav-hamburger'>
 
-				<div className='line l1'></div>
-				<div className='line l2'></div>
-				<div className='line l3'></div>
+				<div className={!showNav ? 'line' : 'line rotate'}></div>
+				<div className={!showNav ? 'line' : 'opacity'}></div>
+				<div className={!showNav ? 'line' : 'line rotateB'}></div>
 
 			</div>
 			<NavLink to="/"><h4>Binge<span>Box</span></h4></NavLink>

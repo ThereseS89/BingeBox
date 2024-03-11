@@ -26,15 +26,15 @@ const router = createBrowserRouter([
 				element: <Login />
 			},
 			{
-				path: "myPage",
+				path: "/myPage",
 				element: <MyPage />
 			},
 			{
-				path: "mediaPage",
+				path: "/mediaPage/:id",
 				element: <MediaPage />
 			},
 			{
-				path: "aboutUs",
+				path: "/aboutUs",
 				element: <AboutUs />
 			}
 		],

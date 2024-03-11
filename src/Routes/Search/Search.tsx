@@ -3,19 +3,17 @@ import { FaSearch } from "react-icons/fa"
 import { tvshowData, movieData } from "../../assets/data/testdata"
 const mediaData = [...tvshowData, ...movieData]
 import './search.scss'
+import { searchFunction } from "../../Utils/regularUtils"
 
 const Search = () => {
 	
 	const [searching, setSearching] = useState(false);
 	const [matchedMedia, setMatchedMedia ] = useState<{ Name: string; Genre: string; Duration: string; PremiereYear: number; ShortDescription: string; Actors: string[]; Image: string; }[]>([])
-	
-	const searchFunction = (event: { target: { value: string} }) => {
-		const searchString: string = event.target.value.toLowerCase();
-		const filteredMovies = mediaData.filter((media) => {
-			return searchString === '' || media.Name.toLowerCase().includes(searchString) || media.Actors.map(str => str.toLowerCase()).includes(searchString)
-		})
 
-		setMatchedMedia(filteredMovies)
+	const handleSearch = (event: { target: { value: string} }) => {
+		const searchString = event.target.value.toLowerCase();
+		const search = searchFunction(mediaData, searchString)
+		setMatchedMedia(search)
 		setSearching(true)
 	} 
 
@@ -30,7 +28,7 @@ const Search = () => {
 				<h5 className="search-text">Sök</h5>
 					<input 
 						onBlur={handleBlur}
-						onChange={searchFunction} 
+						onChange={handleSearch} 
 						placeholder="Vad letar du efter?">
 					</input><FaSearch className="search-icon" />
 			</div>
