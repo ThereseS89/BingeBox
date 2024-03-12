@@ -1,0 +1,90 @@
+service: bingebox-serverless
+frameworkVersion: "3"
+configValidationMode: error
+
+plugins:
+  -serverless-webpack
+
+package:
+    individually: true
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  profile: bingeBox-user
+  region: eu-north-1
+  iam:
+    role: arn:aws:iam::497017796861:role/bingeBox-role
+  
+functions:
+  getlist:
+    handler: lambdas/endpoints/getlist.handler
+    events: 
+      - httpApi:
+          path: /bingebox/list
+          method: GET
+          
+
+  postListItem:
+    handler: lambdas/endpoints/postlistItem.handler
+    events:
+      - httpApi:
+          path: /bingebox/list
+          method: PUT
+
+resources:
+  Resources:
+    # UserTable:
+    #   Type: AWS::DynamoDB::Table
+    #   DeletionPolicy: Retain
+    #   Properties:
+    #     TableName: userTable
+    #     AttributeDefinitions:
+    #       - AttributeName: userId
+    #         AttributeType: S
+    #     BillingMode: PAY_PER_REQUEST
+    #     PointInTimeRecoverySpecification:
+    #       PointInTimeRecoveryEnabled: false
+    #     KeySchema:
+    #       - AttributeName: userId
+    #         KeyType: HASH
+       
+
+    userListTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: userListTable
+        AttributeDefinitions:
+          - AttributeName: "userId"
+            AttributeType: "S"
+          - AttributeName: "listType"
+            AttributeType: "S"
+        BillingMode: PAY_PER_REQUEST
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+        KeySchema:
+          - AttributeName: "userId"
+            KeyType: HASH
+          - AttributeName: "listType"
+            KeyType: RANGE
+        
+
+    # watchedListTable:
+    #   Type: AWS::DynamoDB::Table
+    #   DeletionPolicy: Retain
+    #   Properties:
+    #     TableName: watchedListTable
+    #     AttributeDefinitions:
+    #       - AttributeName: userId
+    #         AttributeType: S
+    #     BillingMode: PAY_PER_REQUEST
+    #     PointInTimeRecoverySpecification:
+    #       PointInTimeRecoveryEnabled: false
+    #     KeySchema:
+    #       - AttributeName: userId
+    #         KeyType: HASH
+        
+
+      
+  
