@@ -17,73 +17,124 @@ provider:
     role: arn:aws:iam::497017796861:role/bingeBox-role
   
 functions:
-  getlist:
-    handler: lambdas/endpoints/getlist.handler
+# FUNKTIONER TILLHÖRANDE MYLIST
+
+  GETmylist:
+    handler: lambdas/endpoints/GETmylist.handler
     events: 
       - httpApi:
-          path: /bingebox/list
-          method: GET
-          
+          path: /bingebox/mylists
+          method: GET    
 
-  postListItem:
-    handler: lambdas/endpoints/postlistItem.handler
+  POSTmyListItem:
+    handler: lambdas/endpoints/POSTmyListItem.handler
     events:
       - httpApi:
-          path: /bingebox/list
-          method: PUT
+          path: /bingebox/mylists
+          method: POST
+
+  DELETEmyListItem:
+    handler: lambdas/endpoints/DELETEmyListItem.handler
+    events:
+      - httpApi:
+          path: /bingebox/mylists
+          method: DELETE
+
+# FUNKTIONER TILLHÖRANDE WATCHEDLIST
+
+  GETwatchedlist:
+    handler: lambdas/endpoints/GETwatchedlist.handler
+    events: 
+      - httpApi:
+          path: /bingebox/watchedlists
+          method: GET    
+
+  POSTwatchedListItem:
+    handler: lambdas/endpoints/POSTwatchedListItem.handler
+    events:
+      - httpApi:
+          path: /bingebox/watchedlists
+          method: POST
+
+  DELETEwatchedListItem:
+    handler: lambdas/endpoints/DELETEwatchedListItem.handler
+    events:
+      - httpApi:
+          path: /bingebox/watchedlists
+          method: DELETE
 
 resources:
-  Resources:
-    # UserTable:
-    #   Type: AWS::DynamoDB::Table
-    #   DeletionPolicy: Retain
-    #   Properties:
-    #     TableName: userTable
-    #     AttributeDefinitions:
-    #       - AttributeName: userId
-    #         AttributeType: S
-    #     BillingMode: PAY_PER_REQUEST
-    #     PointInTimeRecoverySpecification:
-    #       PointInTimeRecoveryEnabled: false
-    #     KeySchema:
-    #       - AttributeName: userId
-    #         KeyType: HASH
-       
-
-    userListTable:
+  Resources:      
+    MyListTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
-        TableName: userListTable
+        TableName: MyListTable
         AttributeDefinitions:
-          - AttributeName: "userId"
-            AttributeType: "S"
-          - AttributeName: "listType"
-            AttributeType: "S"
+          - AttributeName: userId
+            AttributeType: S
         BillingMode: PAY_PER_REQUEST
         PointInTimeRecoverySpecification:
           PointInTimeRecoveryEnabled: false
         KeySchema:
-          - AttributeName: "userId"
+          - AttributeName: userId
             KeyType: HASH
-          - AttributeName: "listType"
-            KeyType: RANGE
-        
 
-    # watchedListTable:
+
+    WatchedListTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: WatchedListTable
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+         
+     
+    # userListTable:
     #   Type: AWS::DynamoDB::Table
     #   DeletionPolicy: Retain
     #   Properties:
-    #     TableName: watchedListTable
+    #     TableName: userListTable
     #     AttributeDefinitions:
-    #       - AttributeName: userId
-    #         AttributeType: S
+    #       - AttributeName: "userId"
+    #         AttributeType: "S"
+    #       - AttributeName: "listType"
+    #         AttributeType: "S"
     #     BillingMode: PAY_PER_REQUEST
     #     PointInTimeRecoverySpecification:
     #       PointInTimeRecoveryEnabled: false
     #     KeySchema:
-    #       - AttributeName: userId
+    #       - AttributeName: "userId"
     #         KeyType: HASH
+    #       - AttributeName: "listType"
+    #         KeyType: RANGE
+        
+    # CognitoUserPool:
+    #   Type: AWS::Cognito::UserPool
+    #   Properties: 
+    #     UserPoolName: ${self:provider.stage}-user-pool
+    #     UsernameAttributes:
+    #       - email
+    #     AutoVerifiedAttributes:
+    #       - email  
+    # CognitoUserPoolClient:
+    #   Type: AWS::Cognito::UserPoolClient
+    #   Properties:
+    #     ClientName: ${self:provider.stage}-user-pool-client
+    #     UserPoolId:
+    #       Ref: CognitoUserPool
+    #     ExplicitAuthFlows:
+    #       - ADMIN_NO_SRP_AUTH
+    #     GenerateSecret: false
+
+    
         
 
       
