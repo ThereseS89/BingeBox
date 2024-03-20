@@ -1,4 +1,5 @@
-export async function getTrendingTvShows() {
+
+export async function getTrendingMedia() {
 	const options = {
 	method: 'GET',
 	headers: {
@@ -8,7 +9,7 @@ export async function getTrendingTvShows() {
   };
   
   try {
-	const response = await fetch('https://api.themoviedb.org/3/trending/tv/day?language=sv-EU', options)
+	const response = await fetch(`https://api.themoviedb.org/3/trending/all/day?language=sv-EU`, options)
 	if (!response.ok) {
 		throw new Error('Failed to fetch trending movies')
 	}

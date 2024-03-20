@@ -27,7 +27,6 @@ const Root = () => {
 		{!isOverlayVisible ? <Header /> : null }
 		<main>
 			<HamburgerMenu />
-			
 			<Outlet />
 		</main>
 		{!isOverlayVisible ? <Footer /> : null }

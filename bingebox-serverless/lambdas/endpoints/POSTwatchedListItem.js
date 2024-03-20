@@ -6,11 +6,10 @@ import { nanoid } from "nanoid"
 const client = new DynamoDBClient({})
 const dynamo = DynamoDBDocumentClient.from(client)
 
-export const handler = async (event) => {
+export const handler = async (event, context) => {
     console.log('event:', event)
     const requestBody = JSON.parse(event.body);
-    const params = new URLSearchParams(event.rawQueryString);
-    const userId = params.get('userId');
+    const userId = context.authorizer.principalId;
     
     try {
         if (!userId) {

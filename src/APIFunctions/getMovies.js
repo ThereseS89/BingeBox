@@ -1,5 +1,4 @@
-
-export async function getTrendingMovies() {
+export async function getMovies() {
 	const options = {
 	method: 'GET',
 	headers: {
@@ -9,12 +8,13 @@ export async function getTrendingMovies() {
   };
   
   try {
-	const response = await fetch('https://api.themoviedb.org/3/trending/movie/day?language=sv-EU', options)
+	const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc', options)
 	if (!response.ok) {
 		throw new Error('Failed to fetch trending movies')
 	}
 
 	const responseData = await response.json();
+	console.log(responseData)
 	if (!responseData.results || !Array.isArray(responseData.results)) {
 		throw new Error('Invalid response Data')
 	}

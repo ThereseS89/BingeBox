@@ -4,9 +4,8 @@ import { DynamoDBDocumentClient, QueryCommand } from "@aws-sdk/lib-dynamodb";
 const client = new DynamoDBClient({});
 const dynamo = DynamoDBDocumentClient.from(client);
 
-export const handler = async (event) => {
-	const params = new URLSearchParams(event.rawQueryString);
-    const userId = params.get('userId');
+export const handler = async (context) => {
+	const userId = context.authorizer.principalId;
 	console.log(userId)
 	if (!userId) {
         return {

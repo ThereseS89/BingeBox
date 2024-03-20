@@ -45,11 +45,67 @@
 		  margin-top: 0;
 	  }
 
-	  h4 {
+	  h3 {
 		  margin: 0.5em;
 		 
 		  
 	  }
 	
   
+  }
+
+  @media (min-width: 900px) {
+	.card-container {
+		display: flex;
+		justify-content: center;
+
+	}
+
+	  .card {
+		  display: grid;
+		  grid-template-columns: 1fr , 0.5fr;
+		  grid-template-rows: fit-content, auto, auto, auto, auto;
+		  padding: 2em;
+		  width: 70%;
+		  gap: 1.5em;
+		 
+		  
+
+		  h3 {
+			  margin: 0;
+			  grid-row: 1;
+			  grid-column: 2;
+			  height: fit-content;
+		  }
+
+		  .info-container {
+			  grid-row: 2;
+			  grid-column: 2;
+		  }
+		  p {
+			  grid-row: 4;
+			  grid-column: 2;
+			  
+		  }
+
+		  .actorInfo-container {
+			  grid-column: 2;
+			  grid-row: 5;
+		  }
+
+		  .utils-container {
+			  grid-column: 2;
+			  grid-row: 3; 
+		  }
+
+		  .card-img {
+			  width: 400px;
+			  height: auto;
+			  justify-self: center;
+			  grid-row: span 5;
+			  grid-column: 1;
+
+		  }
+	  }
+	  
   }

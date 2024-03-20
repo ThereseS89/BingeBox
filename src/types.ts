@@ -1,4 +1,6 @@
 export interface Movie {
+	name: string;
+	original_name: string;
 	backdrop_path: string;
 	genre_ids: number[];
 	id: number;
@@ -13,6 +15,15 @@ export interface Movie {
 	video: boolean;
 	vote_average: number;
 	vote_count: number;
+	first_air_date: string;
+  }
+
+
+  export interface myList {
+
+		items: Movie[]
+
+
   }
 
 export interface Media {

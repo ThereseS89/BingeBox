@@ -1,43 +1,34 @@
-import { movieData } from "../../assets/data/testdata";
-import { tvshowData } from "../../assets/data/testdata.js";
-import  aquaman  from "../../assets/imgs/Aquaman.jpeg"
-// import { getTrendingMovies } from '../../APIFunctions/getMovies.js'
-// import { getTrendingTvShows } from "../../APIFunctions/getTvshows";
-// import { useEffect, useState } from "react";
-//import { Movie, Movietest } from '../../types'
-// import { urlImage } from "../../constants/constants";
-import { useRecoilState } from "recoil";
-import {isClickedState, clickedMediaState} from "../../Utils/atoms"
-import { useNavigate } from "react-router-dom";
 
+import { getTrendingMedia } from '../../APIFunctions/getTrendingMedia.js'
+import { useEffect } from "react";
+import { posterImage } from "../../constants/imageconfig";
+import { useRecoilState } from "recoil";
+import {isClickedState, } from "../../Utils/atoms"
+import { useNavigate } from "react-router-dom";
+import { movieDataState } from "../../Utils/atoms";
+import { unavailable } from "../../constants/imageconfig";
 import "../Home/home.scss"
 
 
 
 const Home = () => {
 	const [ isClicked, setIsClicked ] = useRecoilState(isClickedState)
-	
-	//const [clickedMedia, setClickedMedia ] = useRecoilState(clickedMediaState)
-	//const [clickedMedia, setIsClickedMedia] = useRecoilState<Movie[]>(isClickedMediaState)
-	// const [movieDatai, setMovieDatai] = useState<Movie[] | null>(null)
-	// const [TVData, setTVData] = useState<Movie[] | null>(null)
+	const [ trendingMediaDataState, setTrendingMediaDataState] = useRecoilState(movieDataState)
 
-	// useEffect(() => {
+
+	useEffect(() => {
 		
-	// 	async function fetchData() {
-	// 	const trendingMovieData = await getTrendingMovies();
-	// 	const trendigTVData = await getTrendingTvShows()
-			
-			
-	// 		console.log('DATA:', trendingMovieData, movieDatai)
-	// 		setMovieDatai(trendingMovieData)
-	// 		setTVData(trendigTVData)
-	// 	}
-	// 	fetchData()
-	// },[]);
+		async function fetchData() {
+		const trendingMediaData = await getTrendingMedia();
+
+			setTrendingMediaDataState(trendingMediaData)
+		}
+		fetchData()
+	},[]);
+
 	const navigate = useNavigate()
 	const handleMediaClick = (media) => {
-		
+			
 		if (!isClicked) {
 			setIsClicked(true)
 			navigate(`mediaPage/${media.id}`, { state: { media: media } });
@@ -48,11 +39,13 @@ const Home = () => {
 		}
 
 	}
+	
 
 
 	return (
 		<div className="home">
-			<div className="banner">
+			{/* <div className="banner">
+				
 				<div className="banner-img-container">
 					<img src={aquaman} />
 				</div>
@@ -60,29 +53,41 @@ const Home = () => {
 							<button></button>
 							<button></button>
 							<button></button>
-				</div>
-			</div>
+				</div> 
+			</div> */}
 
-			<h5 className="uppercase">Filmer</h5>
-
+			
+			<h3 className="uppercase barlowCon">Trendar idag</h3>
 			<div className="media-container">
-				{ /* {movieDatai !== null }*/}
-				{movieData.map((movie) => ( 
 				
-					<div onClick={()=> handleMediaClick(movie)} key={movie.id}>
-						<img className="movie-img" src={movie.Image} alt={movie.Name} /> 
+				{trendingMediaDataState !== null && trendingMediaDataState.map((movie) => ( 
+				
+					<div 
+					className="poster-div" 
+					onClick={()=> handleMediaClick(movie)} 
+					key={movie.id}>
+						<h5>{movie.title || movie.name}</h5>
+						<img 
+						className="movie-img" 
+						src={movie.poster_path ? posterImage + movie.poster_path : unavailable} 
+						alt={movie.title} /> 
+						
+						<div className='fontyellow media-card-text'>
+							<p className='uppercase'>{movie.media_type}</p>
+							<p>{movie.release_date || movie.first_air_date} </p>
+						</div>
+
 					</div>
 			
 				))}
 			</div>
 			
 			
-			<h5 className="uppercase">Tv-serier</h5>	
+			{/* <h5 className="uppercase">Tv-serier</h5>	
 			<div className="media-container">
-				{/* TVData !== null && TVData */}
-				{tvshowData.map((tvshow) => (
-				<div onClick={() => handleMediaClick(tvshow)} key={tvshow.id} >
-					<img className="movie-img" src={tvshow.Image}></img>
+				{tvshowData !== null && tvshowData.map((tvshow) => (
+				<div className="poster-div" onClick={() => handleMediaClick(tvshow)} key={tvshow.id} >
+					<img className="movie-img" src={urlImage+tvshow.poster_path} /> <p>{tvshow.name}</p> 
 				</div>
 				))}
 				
@@ -90,14 +95,12 @@ const Home = () => {
 
 			<h5 className="uppercase">Populärt</h5>
 			<div className="media-container">
-				
-				
-				{tvshowData.map((popmedia) => (
-				<div onClick={() => handleMediaClick(popmedia)} key={popmedia.id} >
-					<img className="movie-img" src={popmedia.Image}></img>
+			{tvshowData !== null && tvshowData.map((popmedia) => (
+				<div className="poster-div" onClick={() => handleMediaClick(popmedia)} key={popmedia.id} >
+					<img className="movie-img" src={urlImage+popmedia.poster_path}></img>
 				</div>
 				))}
-			</div>	
+			</div>	 */}
 			
 		</div>
 	)

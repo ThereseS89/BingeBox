@@ -3,6 +3,9 @@
     "@aws-sdk/client-dynamodb": "^3.529.1",
     "@aws-sdk/lib-dynamodb": "^3.529.1",
     "aws-sdk": "^2.1576.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2",
     "nanoid": "^5.0.6"
   }
 }

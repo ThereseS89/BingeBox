@@ -4,10 +4,10 @@ import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from "@aws-sdk/lib-
 const client = new DynamoDBClient({})
 const dynamo = DynamoDBDocumentClient.from(client)
 
-export const handler = async (event) => {
+export const handler = async (event, context) => {
 	console.log('event:', event);
 	const params = new URLSearchParams(event.rawQueryString);
-    const userId = params.get('userId');
+    const userId = context.authorizer.principalId;
 	const mediaId = params.get('mediaId');
 
     let body;

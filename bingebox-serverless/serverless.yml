@@ -63,6 +63,13 @@ functions:
           path: /bingebox/watchedlists
           method: DELETE
 
+  LOGINAuth:
+    handler: lambdas/endpoints/LOGINAuth.handler
+    events:
+      - httpApi:
+          path: /bingebox/login
+          method: POST
+
 resources:
   Resources:      
     MyListTable:
@@ -94,6 +101,21 @@ resources:
           PointInTimeRecoveryEnabled: false
         KeySchema:
           - AttributeName: userId
+            KeyType: HASH
+    
+    UserTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: UserTable
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: false
+        KeySchema:
+          - AttributeName: email
             KeyType: HASH
          
      

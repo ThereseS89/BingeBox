@@ -1,3 +1,4 @@
+import 'dotenv/config';
 
 module.exports.handler = async (event) => {
   return {

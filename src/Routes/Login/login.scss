@@ -1,0 +1,38 @@
+@import '/src/variables.scss';
+.login-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+
+	.form-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 10%;
+		gap: 2em;
+
+	}
+
+	input {
+		width: 20rem;	
+		margin: 1em 1em 1em 0em;	
+	}
+	
+	p {
+			align-self: flex-start;
+		}
+
+		button {
+			margin-top: 1em;
+			background-color: $green;
+			padding: 1em;
+			border-radius: 1em;
+			color: $text;
+			border: none;
+			box-shadow: 5px 5px 5px rgb(65, 65, 65);
+			font-size: 1.3em;
+		}
+
+}

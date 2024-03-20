@@ -5,6 +5,8 @@ import  router  from "./Routes/routeconfig.jsx"
 import './index.scss'
 import { RecoilRoot } from 'recoil'
 
+
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RecoilRoot>
