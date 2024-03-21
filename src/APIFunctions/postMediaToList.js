@@ -1,22 +1,22 @@
 import { url } from "../constants/constants";
 
-export async function postMediatWatchedList() {
+export async function postMediaWatchedList(media) {
 	try {
+		const token = localStorage.getItem('token')
+		if (!token) {
+			throw new Error('JWT token not found in local Storage.')
+		}
 		const response = await fetch(
-		'', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				"myItems": [ {
-					mediaId: MediaDeviceInfo,
-
-					
-				}
-				]
-			}),
-			
+			url + 'bingebox/watchedlists', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`
+				},
+				body: JSON.stringify({
+					items: [media]
+	
+				}),
 		});
 		
 		if (!response.ok){
@@ -26,10 +26,12 @@ export async function postMediatWatchedList() {
 			console.log(data);
 			return data 
 		
-} catch(error) {
+	} catch(error) {
 		console.error('Error posting data:', error.message);
 	}
 }
+
+
 
 export async function postMediaMyList(media) {
 	try {
@@ -59,7 +61,7 @@ export async function postMediaMyList(media) {
 			console.log(data);
 			return data 
 		
-} catch(error) {
+	} catch(error) {
 		console.error('Error posting data:', error.message);
 		throw error;
 	}

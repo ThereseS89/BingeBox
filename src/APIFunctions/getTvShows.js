@@ -1,14 +1,16 @@
-export async function getMovies() {
+
+
+export async function getTvShows() {
 	const options = {
 	method: 'GET',
 	headers: {
 		accept: 'application/json',
-		Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNWI2NWI4YWVmYWVmYmE3Nzk3MzIxMDk3MjYwNWRkOSIsInN1YiI6IjY1ZDlhMTFkNDJkODM3MDE3YjlhMjM3OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UH2BRGQIiJzm5RjjkD2SrdvptU7WTTcJb0xWJcURppI'
+		Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNWI2NWI4YWVmYWVmYmE3Nzk3MzIxMDk3MjYwNWRkOSIsInN1YiI6IjY1ZDlhMTFkNDJkODM3MDE3YjlhMjM3OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UH2BRGQIiJzm5RjjkD2SrdvptU7WTTcJb0xWJcURppI', 
 	}
   };
   
   try {
-	const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SV&page=1&sort_by=popularity.desc', options)
+	const response = await fetch('https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-SV&page=1&sort_by=popularity.desc', options)
 	if (!response.ok) {
 		throw new Error('Failed to fetch trending movies')
 	}

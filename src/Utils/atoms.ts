@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import {  Movie} from "../types";
+import {  Actors, MediaDetails, Movie, myList} from "../types";
 
 export const isOverlayState = atom ({
 	key: 'isOverlayState',
@@ -39,20 +39,23 @@ export const movieDataState = atom ({
 export const isClickedState = atom ({
 	key: 'isClickedState',
 	default: false,
-}) 
+})
+
+export const savedToListState = atom ({
+	key: 'savedToListState',
+	default: false,
+})
+
+
 
 export const clickedMediaState = atom ({
 	key: 'clickedMediaState',
-	default: {
-		id: null,
-		media_type: '',
-		overview: '',
-		poster_path: '',
-		release_date: '',
-		title: '',
-		vote_average: null,
-		vote_count: null,
-	},
+	default: [] as MediaDetails[],
+}) 
+
+export const actorsState = atom ({
+	key: 'actorsState',
+	default: [] as Actors[] ,
 }) 
 
 export const isValidEmailAtom = atom({
@@ -67,6 +70,11 @@ export const errorMessageAtom = atom({
 		password: ''
 	}
 }); 
+
+export const layoutState = atom ({
+	key: 'layoutState',
+	default: true,
+}) 
 
 
 

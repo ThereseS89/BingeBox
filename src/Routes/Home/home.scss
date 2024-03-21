@@ -11,7 +11,7 @@
 	.banner {
 		width: 100%;
 		height: 8em;
-		display: flex;
+		display: inline-flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
@@ -34,6 +34,10 @@
 		}
 		
 	}
+
+	// .layout-set {
+	// 	margin-left: 80% ;
+	// }
 
 	// h5 {
 	// 	font-weight: 300;

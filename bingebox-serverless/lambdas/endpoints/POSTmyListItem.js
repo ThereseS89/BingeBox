@@ -22,13 +22,14 @@ export const handler = async (event) => {
         
         if (userId !== undefined) {
             console.log(userId !== undefined)
-            // const newItem = {
-            //     mediaId: requestBody.items[0].id || '',
-            //     Name: requestBody.items[0].title || requestBody.items[0].name || '',
-            //     PremiereYear: requestBody.items[0].release_date || '',
-            //     ShortDescription: requestBody.items[0].overview || '',
-            //     Image: requestBody.items[0].poster_path || '',
-            // };
+            const newItem = {
+                mediaId: requestBody.items[0].id || '',
+                name: requestBody.items[0].title || requestBody.items[0].name || '',
+                premiereYear: requestBody.items[0].release_date || '',
+                shortDescription: requestBody.items[0].overview || '',
+                imageposter: requestBody.items[0].poster_path || '',
+                imagelandscape: requestBody.items[0].backdrop_path || '',
+            };
 
             const getListResponse = await dynamo.send(
                 new GetCommand({
@@ -43,7 +44,7 @@ export const handler = async (event) => {
 
         const updatedList = existingList ? existingList : [];
 
-        updatedList.push(requestBody);
+        updatedList.push(newItem);
 
         // Skicka upp det nya objektet till DynamoDB-tabellen
         const updateList = await dynamo.send(

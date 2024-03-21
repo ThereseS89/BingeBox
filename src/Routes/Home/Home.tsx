@@ -5,15 +5,19 @@ import { posterImage } from "../../constants/imageconfig";
 import { useRecoilState } from "recoil";
 import {isClickedState, } from "../../Utils/atoms"
 import { useNavigate } from "react-router-dom";
-import { movieDataState } from "../../Utils/atoms";
+import { movieDataState, clickedMediaState, actorsState, layoutState } from "../../Utils/atoms";
 import { unavailable } from "../../constants/imageconfig";
 import "../Home/home.scss"
-
+import { getMediaDetails, getMediaActors } from '../../APIFunctions/getMediaDetails.js';
+import LayoutSort from '../../Components/layoutSort.js';
 
 
 const Home = () => {
 	const [ isClicked, setIsClicked ] = useRecoilState(isClickedState)
 	const [ trendingMediaDataState, setTrendingMediaDataState] = useRecoilState(movieDataState)
+	const [ selectedMedia, setSelectedMedia ] = useRecoilState(clickedMediaState)
+	const [actors, setActors] = useRecoilState(actorsState)
+	const [layout, setLayout ] = useRecoilState(layoutState)
 
 
 	useEffect(() => {
@@ -27,11 +31,19 @@ const Home = () => {
 	},[]);
 
 	const navigate = useNavigate()
-	const handleMediaClick = (media) => {
+	const handleMediaClick = async (media, id, mediaType ) => {
+		console.log('Media typ:' ,mediaType, id)
+		const mediaDetails = await getMediaDetails(id, mediaType)	
+		setSelectedMedia(mediaDetails)
+
+		const actorDetails = await getMediaActors(id, mediaType )
+			
+			setActors(actorDetails)
+			console.log('ACTORS:', actors)
 			
 		if (!isClicked) {
 			setIsClicked(true)
-			navigate(`mediaPage/${media.id}`, { state: { media: media } });
+			navigate(`/mediaPage/${media.id}`, { state: { media: media } });
 			console.log('movie', media)
 
 		} else {
@@ -57,14 +69,14 @@ const Home = () => {
 			</div> */}
 
 			
-			<h3 className="uppercase barlowCon">Trendar idag</h3>
+			<h3 className="uppercase barlowCon">Trendar idag</h3><div className='layout-set'><LayoutSort /></div>
 			<div className="media-container">
 				
 				{trendingMediaDataState !== null && trendingMediaDataState.map((movie) => ( 
 				
 					<div 
-					className="poster-div" 
-					onClick={()=> handleMediaClick(movie)} 
+					className={layout ? 'poster-div' : 'poster-div-small'} 
+					onClick={()=> handleMediaClick(movie, movie.id, movie.media_type)} 
 					key={movie.id}>
 						<h5>{movie.title || movie.name}</h5>
 						<img 

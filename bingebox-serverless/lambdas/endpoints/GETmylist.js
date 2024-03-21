@@ -1,6 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, QueryCommand } from "@aws-sdk/lib-dynamodb";
-//import { getUserId } from './auth'
 const client = new DynamoDBClient({});
 const dynamo = DynamoDBDocumentClient.from(client);
 import pkg from 'aws-sdk';
@@ -17,7 +16,10 @@ export const handler = async (event) => {
 	if (!userId) {
         return {
             statusCode: 400,
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+				"Content-Type": "application/json",
+				},
+
             body: JSON.stringify({ message: "Missing userId query parameter" }),
         };
     }
@@ -36,7 +38,9 @@ try {
 	)
 	return {
 		statusCode: 200,
-		headers: { "Content-Type": "application/json" },
+		headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Methods": "GET, DELETE, PUT, POST, OPTIONS",
+		"Access-Control-Allow-Header": "Content-Type,Authorization" },
 		body: JSON.stringify({ message: "successfull", myList: Items }),
 	};
 } catch (err) {

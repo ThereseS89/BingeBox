@@ -10,16 +10,23 @@ import HamburgerMenu from "../Components/Hamburgermenu"
 
 const Root = () => {
 	const [isOverlayVisible, setIsOverlayVisible]= useState(true)
+	const [ overlayHasShowned, setOverlayhasShowned ] = useState(false)
 	
 	
 	useEffect(() => {
-		setIsOverlayVisible(true);
+		if (!overlayHasShowned) {
+			setIsOverlayVisible(true);
+			setOverlayhasShowned(true)
+			
+			const timeout = setTimeout(() => {
+				setIsOverlayVisible(false);
+			}, 5000 )
+			return () => clearTimeout(timeout)
+		}
 
-		const timeout = setTimeout(() => {
-			setIsOverlayVisible(false);
-		}, 5000 )
-		return () => clearTimeout(timeout)
 	}, []);
+
+	
 	
 	return (
 		<>

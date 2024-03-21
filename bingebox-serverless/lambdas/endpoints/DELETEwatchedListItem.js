@@ -4,11 +4,15 @@ import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from "@aws-sdk/lib-
 const client = new DynamoDBClient({})
 const dynamo = DynamoDBDocumentClient.from(client)
 
-export const handler = async (event, context) => {
-	console.log('event:', event);
-	const params = new URLSearchParams(event.rawQueryString);
-    const userId = context.authorizer.principalId;
-	const mediaId = params.get('mediaId');
+import pkg from 'aws-sdk';
+const { CognitoIdentityServiceProvider } = pkg;
+const cognito = new CognitoIdentityServiceProvider({ region: 'eu-north-1' });
+
+export const handler = async (event) => {
+	const authorizationHeader = event.headers.authorization;
+    const AccessToken = authorizationHeader ? authorizationHeader.split(' ')[1] : null;
+	const user = await cognito.getUser({ AccessToken: AccessToken}).promise();
+    const userId = user.Username
 
     let body;
     let statusCode = 200;

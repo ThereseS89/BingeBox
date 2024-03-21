@@ -1,48 +1,43 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocumentClient, UpdateCommand, GetCommand } from "@aws-sdk/lib-dynamodb"
-import { nanoid } from "nanoid"
-//import responses from "../common/API_Responses"
 
 const client = new DynamoDBClient({})
 const dynamo = DynamoDBDocumentClient.from(client)
+import pkg from 'aws-sdk';
+const { CognitoIdentityServiceProvider } = pkg;
+const cognito = new CognitoIdentityServiceProvider({ region: 'eu-north-1' });
 
-export const handler = async (event, context) => {
+export const handler = async (event) => {
     console.log('event:', event)
     const requestBody = JSON.parse(event.body);
-    const userId = context.authorizer.principalId;
+    const authorizationHeader = event.headers.authorization;
+    const AccessToken = authorizationHeader ? authorizationHeader.split(' ')[1] : null;
+    console.log('requestBody', requestBody )
     
     try {
-        if (!userId) {
-            throw new Error("Missing userId in request body.");
-        }
+        const user = await cognito.getUser({ AccessToken: AccessToken}).promise();
+        const userId = user.Username
+        if (userId !== undefined) {
+            console.log(userId !== undefined)
+            const newItem = {
+                mediaId: requestBody.items[0].id || '',
+                name: requestBody.items[0].title || requestBody.items[0].name || '',
+                premiereYear: requestBody.items[0].release_date || '',
+                shortDescription: requestBody.items[0].overview || '',
+                imageposter: requestBody.items[0].poster_path || '',
+                imagelandscape: requestBody.items[0].backdrop_path || '',
+            };
 
-        if (!requestBody.items) {
-            throw new Error("Invalid request body. 'items' array is missing or invalid.");
-        }
+            const getListResponse = await dynamo.send(
+                new GetCommand({
+                    TableName: 'WatchedListTable',
+                    Key: {
+                        'userId': userId,
+                    }
+                })
+            )
 
-        const mediaId = nanoid()
-        // Skapa det nya objektet med det genererade id:t och de andra attributen
-        const newItem = {
-            mediaId: mediaId,
-            Name: requestBody.items[0].Name || '',
-            Genre: requestBody.items[0].Genre || '',
-            Duration: requestBody.items[0].Duration || '',
-            PremiereYear: requestBody.items[0].PremiereYear || '',
-            ShortDescription: requestBody.items[0].ShortDescription || '',
-            Actors: requestBody.items[0].Actors || [''],
-            Image: requestBody.items[0].Image || '',
-        };
-
-        const getListResponse = await dynamo.send(
-            new GetCommand({
-                TableName: 'WatchedListTable',
-                Key: {
-                    'userId': userId,
-                }
-            })
-        )
-
-        const existingList = getListResponse.Item ? getListResponse.Item.myList : [];
+            const existingList = getListResponse.Item ? getListResponse.Item.watchedList : [];
 
         const updatedList = existingList ? existingList : [];
 
@@ -55,19 +50,24 @@ export const handler = async (event, context) => {
                 Key: {
                     'userId': userId,
                 },
-                UpdateExpression: "SET myList = :myList",
+                UpdateExpression: "SET watchedList = :watchedList",
                 ExpressionAttributeValues: {
-                    ":myList": existingList
+                    ":watchedList": updatedList
                 },
                 ReturnValues: "UPDATED_NEW"
             })
         );
-
-    return {
+        console.log('uppdaterade listan: ', updateList)
+           
+        return {
             statusCode: 200,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: "successfull", items: updateList }),
         };
+        } else {
+            throw new Error('Användaren inte autentierad')
+        }
+    
     } catch (err) {
         return {
             statusCode: err.statusCode,
