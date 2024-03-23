@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import {  Actors, MediaDetails, Movie, myList} from "../types";
+import {  Actors, MediaDetails, Movie} from "../types";
 
 export const isOverlayState = atom ({
 	key: 'isOverlayState',
@@ -46,7 +46,10 @@ export const savedToListState = atom ({
 	default: false,
 })
 
-
+export const savedToWatchedState = atom ({
+	key: 'savedToWatchedState',
+	default: false,
+})
 
 export const clickedMediaState = atom ({
 	key: 'clickedMediaState',

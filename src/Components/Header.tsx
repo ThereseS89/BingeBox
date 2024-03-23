@@ -1,12 +1,12 @@
 import './Stylesheets/header.scss'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { isLoggedInState, showNavState } from '../Utils/atoms'
 import { NavLink } from 'react-router-dom'
 import { IoPerson } from "react-icons/io5"
 
 const Header = () => {
 	const [showNav, setShowNav] = useRecoilState<boolean>(showNavState)
-	const [ isLoggedIn, setIsloggedIn ] = useRecoilState<boolean>(isLoggedInState)
+	const isLoggedIn = useRecoilValue<boolean>(isLoggedInState)
 
 	const handleClickNav = () => {
 		if (!showNav) {
@@ -15,7 +15,6 @@ const Header = () => {
 		} else {
 			setShowNav(false)
 		}
-		console.log(showNav)
 	}
 
 	return (

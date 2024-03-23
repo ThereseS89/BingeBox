@@ -1,9 +1,9 @@
 import './login.scss'
 import { isValidEmail } from '../../Utils/regularUtils';
 import { useState } from 'react';
-import { handleLoginAuth } from '../../APIFunctions/Auth';
+import { handleLoginAuth } from '../../APIFunctions/Auth'
 import {  useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { isLoggedInState } from '../../Utils/atoms';
 
 const Login = () => {
@@ -12,14 +12,14 @@ const Login = () => {
 	const [ password, setPassword ] = useState('')
 	const [errorMessage, setErrorMessage] = useState('') 
 	const [ isInputValue, setIsInputValue ] = useState(false)
-	const [isLoggedIn, setIsloggedIn] = useRecoilState<boolean>(isLoggedInState) 
+	const setIsloggedIn = useSetRecoilState<boolean>(isLoggedInState) 
 
 
 	const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {	
 		setEmail(event.target.value);
 		if (!isInputValue) {
 			setIsInputValue(true)
-			console.log(email)
+		
 		} else {
 			setIsInputValue(false)
 		}
@@ -49,6 +49,7 @@ const Login = () => {
 			setIsloggedIn(true)
 		} catch (error) {
 			console.error('Fel vid inloggning:' , error)
+			setErrorMessage('Felaktiga inloggningsuppgifter')
 		}
 	}
 

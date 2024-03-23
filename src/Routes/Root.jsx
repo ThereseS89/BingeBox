@@ -6,8 +6,6 @@ import {useState, useEffect} from "react"
 import '../../src/index.scss'
 import HamburgerMenu from "../Components/Hamburgermenu"
 
-
-
 const Root = () => {
 	const [isOverlayVisible, setIsOverlayVisible]= useState(true)
 	const [ overlayHasShowned, setOverlayhasShowned ] = useState(false)
@@ -17,7 +15,7 @@ const Root = () => {
 		if (!overlayHasShowned) {
 			setIsOverlayVisible(true);
 			setOverlayhasShowned(true)
-			
+
 			const timeout = setTimeout(() => {
 				setIsOverlayVisible(false);
 			}, 5000 )

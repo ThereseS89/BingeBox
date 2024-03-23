@@ -1,0 +1,18 @@
+.media {
+	padding-top: 1em;
+	padding-bottom: 1em;
+
+	h3 {
+		text-align: center;
+		color: white;
+	}
+	
+	@media (min-width: 764px) {
+
+		h3 {
+			text-align: left;
+			margin-left: 1em;
+		}
+	}
+}
+

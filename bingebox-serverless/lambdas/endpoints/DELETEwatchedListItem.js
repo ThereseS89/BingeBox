@@ -13,11 +13,15 @@ export const handler = async (event) => {
     const AccessToken = authorizationHeader ? authorizationHeader.split(' ')[1] : null;
 	const user = await cognito.getUser({ AccessToken: AccessToken}).promise();
     const userId = user.Username
+    const mediaId = JSON.parse(event.body).mediaId
 
     let body;
     let statusCode = 200;
     const headers = {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, DELETE, PUT, POST, OPTIONS",
+        "Access-Control-Allow-Header": "Content-Type,Authorization"
     };
 
     try {
@@ -31,7 +35,7 @@ export const handler = async (event) => {
             })
         );
 
-        const existingList = getListResponse.Item ? getListResponse.Item.myList : [];
+        const existingList = getListResponse.Item ? getListResponse.Item.watchedList : [];
 
         // Hitta indexet för objektet som ska tas bort från myList
         const indexToRemove = existingList.findIndex(item => item.mediaId === mediaId);

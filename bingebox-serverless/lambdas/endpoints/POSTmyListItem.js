@@ -8,7 +8,6 @@ const { CognitoIdentityServiceProvider } = pkg;
 const cognito = new CognitoIdentityServiceProvider({ region: 'eu-north-1' });
 
 export const handler = async (event) => {
-    console.log('event:', event)
     const requestBody = JSON.parse(event.body);
     const authorizationHeader = event.headers.authorization;
     const AccessToken = authorizationHeader ? authorizationHeader.split(' ')[1] : null;

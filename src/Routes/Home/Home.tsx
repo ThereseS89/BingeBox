@@ -1,23 +1,18 @@
 
-import { getTrendingMedia } from '../../APIFunctions/getTrendingMedia.js'
+import { getTrendingMedia } from '../../APIFunctions/getTrendingMedia'
 import { useEffect } from "react";
-import { posterImage } from "../../constants/imageconfig";
-import { useRecoilState } from "recoil";
-import {isClickedState, } from "../../Utils/atoms"
-import { useNavigate } from "react-router-dom";
-import { movieDataState, clickedMediaState, actorsState, layoutState } from "../../Utils/atoms";
-import { unavailable } from "../../constants/imageconfig";
+import { posterImage, unavailable } from "../../constants/imageconfig";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { movieDataState, layoutState } from "../../Utils/atoms";
 import "../Home/home.scss"
-import { getMediaDetails, getMediaActors } from '../../APIFunctions/getMediaDetails.js';
-import LayoutSort from '../../Components/layoutSort.js';
+import { useMediaClickHandler } from '../../Utils/regularUtils.js';
+import LayoutSort from '../../Components/layoutSort';
 
 
 const Home = () => {
-	const [ isClicked, setIsClicked ] = useRecoilState(isClickedState)
+	const handleMediaClick = useMediaClickHandler()
 	const [ trendingMediaDataState, setTrendingMediaDataState] = useRecoilState(movieDataState)
-	const [ selectedMedia, setSelectedMedia ] = useRecoilState(clickedMediaState)
-	const [actors, setActors] = useRecoilState(actorsState)
-	const [layout, setLayout ] = useRecoilState(layoutState)
+	const layout = useRecoilValue(layoutState)
 
 
 	useEffect(() => {
@@ -30,44 +25,8 @@ const Home = () => {
 		fetchData()
 	},[]);
 
-	const navigate = useNavigate()
-	const handleMediaClick = async (media, id, mediaType ) => {
-		console.log('Media typ:' ,mediaType, id)
-		const mediaDetails = await getMediaDetails(id, mediaType)	
-		setSelectedMedia(mediaDetails)
-
-		const actorDetails = await getMediaActors(id, mediaType )
-			
-			setActors(actorDetails)
-			console.log('ACTORS:', actors)
-			
-		if (!isClicked) {
-			setIsClicked(true)
-			navigate(`/mediaPage/${media.id}`, { state: { media: media } });
-			console.log('movie', media)
-
-		} else {
-			setIsClicked(false)
-		}
-
-	}
-	
-
-
 	return (
 		<div className="home">
-			{/* <div className="banner">
-				
-				<div className="banner-img-container">
-					<img src={aquaman} />
-				</div>
-				<div className="dot-indicators flex">
-							<button></button>
-							<button></button>
-							<button></button>
-				</div> 
-			</div> */}
-
 			
 			<h3 className="uppercase barlowCon">Trendar idag</h3><div className='layout-set'><LayoutSort /></div>
 			<div className="media-container">
@@ -95,24 +54,6 @@ const Home = () => {
 			</div>
 			
 			
-			{/* <h5 className="uppercase">Tv-serier</h5>	
-			<div className="media-container">
-				{tvshowData !== null && tvshowData.map((tvshow) => (
-				<div className="poster-div" onClick={() => handleMediaClick(tvshow)} key={tvshow.id} >
-					<img className="movie-img" src={urlImage+tvshow.poster_path} /> <p>{tvshow.name}</p> 
-				</div>
-				))}
-				
-			</div>
-
-			<h5 className="uppercase">Populärt</h5>
-			<div className="media-container">
-			{tvshowData !== null && tvshowData.map((popmedia) => (
-				<div className="poster-div" onClick={() => handleMediaClick(popmedia)} key={popmedia.id} >
-					<img className="movie-img" src={urlImage+popmedia.poster_path}></img>
-				</div>
-				))}
-			</div>	 */}
 			
 		</div>
 	)

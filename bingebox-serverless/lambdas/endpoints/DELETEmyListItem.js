@@ -13,7 +13,7 @@ export const handler = async (event) => {
 	const user = await cognito.getUser({ AccessToken: AccessToken}).promise();
     const userId = user.Username
     const mediaId = JSON.parse(event.body).mediaId
-    console.log('mediaId?:', mediaId)
+ 
 
     let body;
     let statusCode = 200;

@@ -3,56 +3,43 @@ import { useState, useEffect } from "react";
 import { getTvShows } from "../../APIFunctions/getTvShows";
 import { Movie } from "../../types";
 import { posterImage, unavailable } from "../../constants/imageconfig";
-import { isClickedState, clickedMediaState, layoutState } from "../../Utils/atoms";
-import { useRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
-import { getMediaDetails } from "../../APIFunctions/getMediaDetails";
+import { layoutState } from "../../Utils/atoms";
+import { useRecoilValue } from "recoil";
 import LayoutSort from "../../Components/layoutSort";
-
+import '../Media/media.scss'
+import { useMediaClickHandler } from "../../Utils/regularUtils";
 
 const TvShows = () => {
 	const [tvShows, setTvshows ] = useState<Movie[]>([])
-	const [ isClicked, setIsClicked ] = useRecoilState(isClickedState)
-	const [ selectedMedia, setSelectedMedia ] = useRecoilState(clickedMediaState)
-	const [layout, setLayout ] = useRecoilState(layoutState)
+	const layout = useRecoilValue(layoutState)
+	const handleMediaClick = useMediaClickHandler()
 
 	useEffect(() => {
 		
 		async function fetchData() {
 		const tvShowList = await getTvShows();
+
+		// Lägger till en media_type
 		const tvShowType = tvShowList.map(show => ({
 			...show,
 			media_type: 'tv'
-		}))
+
+		})) 
 
 			setTvshows(tvShowType)
-			console.log('tvshows:', tvShows)
 		}
 		fetchData()
 	}, []);
 
-	const navigate = useNavigate()
-	const handleMediaClick = async (media, id, mediaType) => {
-		console.log('Media typ:' ,mediaType, id)
-		const mediaDetails = await getMediaDetails(id, mediaType)	
-		setSelectedMedia(mediaDetails)
-		if (!isClicked) {
-			setIsClicked(true)
-			navigate(`/mediaPage/${media.id}`, { state: { media: media } });
-			console.log('tvshow', media)
-
-		} else {
-			setIsClicked(false)
-		}
-
-	}
 
 	return (
-		<>
-			<LayoutSort />
+		<div className="media">
+			<h3 className="uppercase barlowCon">TV-Serier</h3>
+		<div><LayoutSort /></div>
 			<div className="media-container">
+				
 			{tvShows !== null && tvShows.map((tv) => ( 
-
+				
 				<div 
 					className={layout ? 'poster-div' : 'poster-div-small'}
 					key={tv.id}
@@ -66,12 +53,12 @@ const TvShows = () => {
 							
 							<div className='fontyellow media-card-text'>
 								<p className='uppercase'>{tv.media_type}</p>
-								<p>{tv.first_air_date} </p>
+								<p>{tv.first_air_date.substring(0,4)} </p>
 							</div>
 
 				</div>))}
 			</div>
-		</>
+		</div>
 	)
 }
 

@@ -1,4 +1,4 @@
-import { NumericalBotVersion } from "aws-sdk/clients/lexmodelsv2";
+
 
 export interface Movie {
 	name: string;

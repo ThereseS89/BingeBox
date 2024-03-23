@@ -34,13 +34,21 @@ export const deleteMylistMedia = async (mediaId)  => {
 
 export const deleteWatchedMedia = async (mediaId) => {
 	try {
+		const token = localStorage.getItem('token')
+		if (!token) {
+			throw new Error('JWT token not found in local Storage.')
+		}
 		const response = await fetch(
-			``,
+			url + 'bingebox/watchedlists',
 			{
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",
+					'Authorization': `Bearer ${token}`,
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "GET, DELETE, PUT, POST, OPTIONS",
 				},
+				body: JSON.stringify({mediaId: mediaId})
 			}
 		)
 

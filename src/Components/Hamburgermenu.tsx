@@ -1,12 +1,11 @@
 
-import { useRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { isLoggedInState, showNavState } from "../Utils/atoms"
 import { NavLink } from "react-router-dom"
 import './Stylesheets/hamburgermenu.scss'
 
-
 const HamburgerMenu = () => {
-	const [isLoggedIn, setIsloggedIn] = useRecoilState<boolean>(isLoggedInState) 
+	const isLoggedIn = useRecoilValue<boolean>(isLoggedInState) 
 	const [showNav, setShowNav] = useRecoilState<boolean>(showNavState)
 	const handleLinkClick = () => {
 		setShowNav(false)
@@ -46,12 +45,6 @@ const HamburgerMenu = () => {
 							className="fontyellow">Tv-serier</NavLink>
 				</li>
 
-				{/* <li onClick={handleLinkClick} 
-					className="uppercase fontyellow">
-						<NavLink 
-							to="/aboutUs" 
-							className="fontyellow">Om BingeBox</NavLink>
-				</li> */}
 
 				{!isLoggedIn ? 
 				<li 

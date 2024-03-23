@@ -66,6 +66,7 @@ h3 {
   font-family: $fontBell;
   font-size: 3rem; 
   letter-spacing: 1px;
+  margin-left: 0.3em;
   }
 
   @media (min-width: 45rem) {
@@ -81,6 +82,7 @@ h3 {
       font-family: $fontBell;
       font-size: 4rem; 
       letter-spacing: 1px;
+      margin-left: 0.3em;
       }
     
   }
@@ -106,6 +108,27 @@ p {
   font-family: $fontBar;
   line-height: 32px;
   font-size: 18px;
+}
+
+.flex {
+  display: flex;
+  gap: 0.5em;
+  margin: 0.8em;
+  align-items: center;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.border {
+  border: solid darkgray 1px;
+  border-radius: 1em;
+}
+
+.border:hover {
+  border-color: $green;
+
 }
 
 
@@ -223,6 +246,7 @@ button {
     h5 {
       margin-bottom: 0.5em;
       font-size: 1.2em;
+      letter-spacing: 2px;
     }
 
     .media-card-text {
@@ -240,10 +264,10 @@ button {
       border-radius: 0.8em;
     }
   
+  }
+  
   .poster-div-small:hover {
     border: 2px solid $green;
-  }
-
   }
   
   .poster-div {
@@ -262,6 +286,7 @@ button {
 
     h5 {
       margin-bottom: 0.5em;
+      letter-spacing: 1px;
     }
 
     .media-card-text {

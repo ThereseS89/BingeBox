@@ -1,5 +1,42 @@
 
 import { Movie } from "../types"
+import { useRecoilState, useSetRecoilState } from "recoil"
+import { getMediaDetails, getMediaActors } from "../APIFunctions/getMediaDetails"
+import { useNavigate } from "react-router-dom"
+import { actorsState, clickedMediaState, isClickedState } from "./atoms"
+
+export function useMediaClickHandler() { 
+		const navigate = useNavigate()
+		const [ isClicked, setIsClicked ] = useRecoilState(isClickedState)
+		const setSelectedMedia = useSetRecoilState(clickedMediaState)
+		const setActors = useSetRecoilState(actorsState)
+	
+	
+	const handleMediaClick = async (media, id, mediaType) => {
+
+		const mediaDetails = await getMediaDetails(id, mediaType)	
+		setSelectedMedia(mediaDetails)
+
+		const actorDetails = await getMediaActors(id, mediaType )
+
+		const actorLength = actorDetails.cast.slice(1,5);
+		setActors(actorLength)
+	
+			if (!isClicked) {
+				setIsClicked(true)
+				navigate(`/mediaPage/${media.id}`);
+				console.log('tvshow', media)
+
+			} else {
+				setIsClicked(false)
+			}
+	}
+
+	return  handleMediaClick 
+	
+	
+}
+
 
 // sökfunktion
 export const searchFunction = (data: Movie[], searchString: string ) => {
