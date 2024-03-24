@@ -1,4 +1,4 @@
-import { myListState, watchedMediaState, savedToListState, savedToWatchedState } from '../../Utils/atoms';
+import { myListState, savedToListState, savedToWatchedState, watchedMediaState } from '../../Utils/atoms';
 import { useEffect, } from 'react';
 import { getMyList, getWatchedList } from '../../APIFunctions/getLists';
 import { NavLink } from 'react-router-dom';
@@ -11,8 +11,8 @@ const MyPage = () => {
 	
 	const [myList, setMyList] = useRecoilState(myListState);
 	const [watchedMedia, setwatchedMedia] = useRecoilState(watchedMediaState)
-	const setSavedToList = useSetRecoilState<boolean>(savedToListState)
-	const setWatched = useSetRecoilState<boolean>(savedToWatchedState)
+	const setSavedToList = useSetRecoilState(savedToListState)
+	const setWatched = useSetRecoilState(savedToWatchedState)
 	const handleMediaClick = useMediaClickHandler()
 
 
@@ -23,6 +23,21 @@ const MyPage = () => {
 	
 				setMyList(apiData.myList[0].myList);
 				setwatchedMedia(data.watchedList[0].watchedList)
+
+				const updatedSavedToList: { [key: string]: boolean } = {};
+				myList.forEach(media => {
+					updatedSavedToList[media.id] = true;
+				});
+				setSavedToList(updatedSavedToList);
+		
+				// Uppdatera watched för filmer i watchedList
+				const updatedWatched: { [key: string]: boolean } ={};
+				watchedMedia.forEach(media => {
+					updatedWatched[media.id] = true;
+				});
+				setWatched(updatedWatched);
+				
+
 		}
 		fetchData();
 		
@@ -36,9 +51,8 @@ const MyPage = () => {
 				<h5 className="uppercase">Min lista</h5>
 				<div className="media-container">
 				
-				{myList && myList.map((media) => {
-					setSavedToList(myList.find(item => item.id === media.id) ? true : false);
-					return (
+				{myList && myList.map((media) => (
+					
 					<div 
 						className="poster-div" 
 						key={media.id} 
@@ -50,7 +64,7 @@ const MyPage = () => {
 
 						<p className='fontwhite'>{media.title || media.name}</p>
 					</div>
-				)})}
+				))}
 					
 				</div>
 			</div>
@@ -67,10 +81,9 @@ const MyPage = () => {
 						</p>
 					</div> 
 					:
-				<div className='media-container'>   
-				{watchedMedia && watchedMedia.map(media => {
-					setWatched(watchedMedia.find(item => item.id === media.id) ? true : false);
-					return (
+				<div className='media-container'> 
+				
+				{watchedMedia && watchedMedia.map(media => (
 					<div 
 						className='poster-div' 
 						key={media.id} 
@@ -81,7 +94,7 @@ const MyPage = () => {
 
 						<p className='fontwhite'>{media.title || media.name}</p>
 
-					</div>)})} 
+					</div> ))} 
 				</div>
 				}
 				

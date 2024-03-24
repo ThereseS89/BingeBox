@@ -14,7 +14,7 @@ export async function postMediaWatchedList(media) {
 					'Authorization': `Bearer ${token}`
 				},
 				body: JSON.stringify({
-					items: [media]
+					items: [media],
 	
 				}),
 		});
@@ -48,7 +48,7 @@ export async function postMediaMyList(media) {
 				'Authorization': `Bearer ${token}`
 			},
 			body: JSON.stringify({
-				items: [media]
+				items: [media],
 
 			}),
 			

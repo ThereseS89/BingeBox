@@ -1,5 +1,6 @@
-import { atom } from "recoil";
-import {  Actors, MediaDetails, Movie} from "../types";
+
+import { atom, atomFamily } from "recoil";
+import {  Actors, MediaDetails, Movie, Saved} from "../types";
 
 export const isOverlayState = atom ({
 	key: 'isOverlayState',
@@ -41,14 +42,15 @@ export const isClickedState = atom ({
 	default: false,
 })
 
-export const savedToListState = atom ({
-	key: 'savedToListState',
-	default: false,
-})
 
-export const savedToWatchedState = atom ({
+export const savedToListState = atom<Record<string, boolean>>({
+	key: 'savedToListState',
+	default: {},
+});
+
+export const savedToWatchedState = atom<Record<string, boolean>>({
 	key: 'savedToWatchedState',
-	default: false,
+	default: {},
 })
 
 export const clickedMediaState = atom ({

@@ -26,8 +26,6 @@ export interface Movie {
   export interface myList {
 
 		items: Movie[]
-
-
   }
 
 export interface Media {
@@ -47,6 +45,11 @@ export interface myListMovie {
 	poster_path: string;
 	title: string;
 }
+
+export interface Saved {
+	id: string; 
+	saved: boolean; 
+  }
 
 
 	

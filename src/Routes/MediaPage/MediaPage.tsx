@@ -15,8 +15,8 @@ const MediaPage = () => {
 	const isLoggedIn = useRecoilValue<boolean>(isLoggedInState) 
 	const [myList, setMyList] = useRecoilState(myListState)
 	const [ watchedMedia , setwatchedMedia ]  = useRecoilState(watchedMediaState)
-	const [savedToList, setSavedToList] = useRecoilState<boolean>(savedToListState)
-	const [watched, setWatched ] = useRecoilState<boolean>(savedToWatchedState)
+	const [savedToList, setSavedToList] = useRecoilState(savedToListState)
+	const [watched, setWatched ] = useRecoilState(savedToWatchedState)
 	const [	windowSize , setWindowSize ] = useState(window.innerWidth)
 	const actors = useRecoilValue(actorsState)
 	const selectedMedia = useRecoilValue(clickedMediaState)
@@ -24,6 +24,7 @@ const MediaPage = () => {
 	const location = useLocation()
 	const [ showMessagelist, setshowMessagelist ] = useState(false) 
 	const [ showMessage, setshowMessage ] = useState(false) 
+
 
 
 	useEffect(() => {
@@ -41,20 +42,23 @@ const MediaPage = () => {
 
 
 	const handleMarkAsWatched = (media) => {
-		setWatched((watchedMedia.some(item => item.id === media.id)))
-		if(!watched) {
-			setWatched(true)
-			setwatchedMedia(list => [...list, media])
+		const isSavedw = watched[media.id];
+		
+		if(!isSavedw) {
+			
+			setWatched({ ...watched, [media.id]: true });
 			addToWatched(media)
+			setwatchedMedia(list => [...list, media])
+			
 			setshowMessage(true)
 			setTimeout(() => {
 				setshowMessage(false);
 						}, 1500);
 			
 		} else {
-			setwatchedMedia((oldList) => oldList.filter(item => item.id !== media.id ));
-			setWatched(false)
+			setWatched({ ...watched, [media.id]: false });
 			removeFromWatchedList(media.id)
+			setwatchedMedia((oldList) => oldList.filter(item => item.id !== media.id ));
 		}
 	}
 
@@ -95,22 +99,26 @@ const MediaPage = () => {
 	}
 
 	const handleSaveToList = (media) => {
-		setSavedToList(myList.some(item => item.id === media.id))
-
-		if(!savedToList) {
-			setSavedToList(true)
-			setMyList(prevList => [...prevList, media])
+		
+		const isSaved = savedToList[media.id]
+		if(!isSaved) {
+			setSavedToList({ ...savedToList, [media.id]: true})
 			addToMyList(media)
+			setMyList(prevList => [...prevList, media])
+			
+			
 			setshowMessagelist(true)
 			setTimeout(() => {
 				setshowMessagelist(false);
 						}, 1500);
 		
 		} else {
-			setSavedToList(false)
+			setSavedToList({ ...savedToList, [media.id]: false})
 			setMyList((oldList) => oldList.filter(item => item.id !== media.id ));
 			removeFromMyList(media.id)
 		}	
+
+		console.log('savedtoList:', savedToList)
 	}
 
 	useEffect(() => {
@@ -125,7 +133,8 @@ const MediaPage = () => {
 	const goBack = () => {
 		window.history.go(-1)
 	}
-
+	console.log('watched:', watched)
+	console.log('saved:', savedToList)
 	return (
 		<div className="card-container">
 
@@ -160,12 +169,12 @@ const MediaPage = () => {
 						<div className="utils-container-addto">
 
 							<span className="fontgreen" onClick={() => handleSaveToList(selectedMedia)}>
-								{ !savedToList ? <FaPlus/> : <FaHeart />}
+								{ savedToList[selectedMedia.id] ? <FaHeart /> : <FaPlus/>}
 							</span>
 							<p className={ showMessagelist ? '' : 'hidden'}>Sparad till din lista!</p>
 
 							<span className="fontgreen" onClick={() => handleMarkAsWatched(selectedMedia)}>
-								{ !watched ? <PiCheckFat/> : <PiCheckFatFill/> } 
+								{ watched[selectedMedia.id] ? <PiCheckFatFill/> : <PiCheckFat/>} 
 							</span>
 							
 							<p className={ showMessage ? '' : 'hidden'}>Du har markerat den som sedd!</p>
