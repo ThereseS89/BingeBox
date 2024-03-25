@@ -6,6 +6,7 @@ import './mypage.scss';
 import { posterImage, landscapeImage } from '../../constants/imageconfig';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useMediaClickHandler } from '../../Utils/regularUtils.js';
+import { IoPerson } from 'react-icons/io5';
 
 const MyPage = () => {
 	
@@ -45,7 +46,7 @@ const MyPage = () => {
 	
 	return (
 		<div className="mypage">
-			<div className='user-container'><h2>T</h2></div>
+			<div className='user-container'><IoPerson className='icon fontyellow'/></div>
 
 			<div className="my-list">
 				<h5 className="uppercase">Min lista</h5>

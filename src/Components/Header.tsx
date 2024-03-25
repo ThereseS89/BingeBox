@@ -19,14 +19,14 @@ const Header = () => {
 
 	return (
 		<header>
-			<div onClick={handleClickNav}
+			{/* <div onClick={handleClickNav}
 				className='nav-hamburger'>
 
 				<div className={!showNav ? 'line' : 'line rotate'}></div>
 				<div className={!showNav ? 'line' : 'opacity'}></div>
-				<div className={!showNav ? 'line' : 'line rotateB'}></div>
+				<div className={!showNav ? 'line' : 'line rotateB'}></div> */}
 
-			</div>
+			{/* </div> */}
 			<NavLink to="/"><h4>Binge<span>Box</span></h4></NavLink>
 			<NavLink to={!isLoggedIn ? '/login' : '/myPage'}><div className='user-container'><span><IoPerson className='person-icon'/></span></div></NavLink>
 			

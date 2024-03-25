@@ -8,16 +8,17 @@ import { useRecoilValue } from "recoil";
 import LayoutSort from "../../Components/layoutSort";
 import '../Media/media.scss'
 import { useMediaClickHandler } from "../../Utils/regularUtils";
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 const TvShows = () => {
 	const [tvShows, setTvshows ] = useState<Movie[]>([])
 	const layout = useRecoilValue(layoutState)
 	const handleMediaClick = useMediaClickHandler()
+	const [page, setPage ] = useState(1)
 
-	useEffect(() => {
-		
-		async function fetchData() {
-		const tvShowList = await getTvShows();
+
+	async function fetchData() {
+		const tvShowList = await getTvShows(page);
 
 		// Lägger till en media_type
 		const tvShowType = tvShowList.map(show => ({
@@ -28,8 +29,27 @@ const TvShows = () => {
 
 			setTvshows(tvShowType)
 		}
+
+
+	useEffect(() => {
 		fetchData()
 	}, []);
+
+
+
+	const fetchNextPage = async () => {
+		const nextPage = page + 1
+		setPage(nextPage)
+	
+			const tvShowList = await getTvShows(nextPage);
+			const tvShowType = tvShowList.map(show => ({
+					...show,
+					media_type: 'tv'
+				}))
+
+			setTvshows(tvShowType)
+
+	}
 
 
 	return (
@@ -57,6 +77,17 @@ const TvShows = () => {
 							</div>
 
 				</div>))}
+				<InfiniteScroll
+				dataLength={tvShows.length} 
+				next={fetchNextPage}
+				hasMore={true}
+				loader={<h4>Loading...</h4>}
+				endMessage={
+				<p style={{ textAlign: 'center', color: 'white' }}>
+				<b>Yay! You have seen it all</b>
+				</p>
+			} >
+			</InfiniteScroll>
 			</div>
 		</div>
 	)

@@ -1,4 +1,5 @@
-export async function getMovies() {
+
+export async function getMovies(page) {
 	const options = {
 	method: 'GET',
 	headers: {
@@ -8,9 +9,9 @@ export async function getMovies() {
   };
   
   try {
-	const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SV&page=1&sort_by=popularity.desc', options)
+	const response = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SV&page=${page}sort_by=popularity.desc`, options)
 	if (!response.ok) {
-		throw new Error('Failed to fetch trending movies')
+		throw new Error('Failed to fetch movies')
 	}
 
 	const responseData = await response.json();

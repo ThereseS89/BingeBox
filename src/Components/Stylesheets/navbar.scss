@@ -1,0 +1,58 @@
+.navbar {
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	background-color: rgb(33, 32, 32);
+	ul {
+		display: flex;
+		list-style: none;
+		gap: 2em;
+		padding: 1em;
+		align-items: center;
+		justify-content: center;
+
+		a {
+			display:flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-decoration: none;
+		}
+
+		.icon {
+			width: 2em;
+			height: auto;
+
+		}
+		p {
+			font-size: 14px;
+		}
+
+
+	}
+	
+}
+
+@media (min-width: 1000px) {
+	.navbar {
+		ul {
+			gap: 8em;
+		}
+	}
+}
+
+@media (max-width: 415px) {
+	.navbar {
+		ul {
+			gap: 0.5em;
+			padding-left: 0.2em;
+		}
+		
+		p {
+			font-size: 12px;
+		}
+	}
+	
+	
+}
+

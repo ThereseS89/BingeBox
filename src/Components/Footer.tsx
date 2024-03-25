@@ -6,6 +6,7 @@ import { FaXTwitter } from 'react-icons/fa6'
 const Footer = () => {
 	return (
 		<footer>
+			
 			<div className='socialmedia-container'> 
 				<FaFacebookF /> <FaYoutube /><FaInstagram /> <FaXTwitter />
 			</div>

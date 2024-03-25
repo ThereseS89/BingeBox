@@ -1,6 +1,6 @@
 
 
-export async function getTvShows() {
+export async function getTvShows(page) {
 	const options = {
 	method: 'GET',
 	headers: {
@@ -10,9 +10,9 @@ export async function getTvShows() {
   };
   
   try {
-	const response = await fetch('https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-SV&page=1&sort_by=popularity.desc', options)
+	const response = await fetch(`https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-SV&page=${page}sort_by=popularity.desc`, options)
 	if (!response.ok) {
-		throw new Error('Failed to fetch trending movies')
+		throw new Error('Failed to fetch tvshows')
 	}
 
 	const responseData = await response.json();
@@ -23,7 +23,7 @@ export async function getTvShows() {
 
 	return responseData.results
   } catch (error) {
-	console.error('Error fetching trending movies: ', error)
+	console.error('Error tvshows: ', error)
 	return []
   }
   

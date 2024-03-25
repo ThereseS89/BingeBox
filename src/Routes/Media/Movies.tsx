@@ -7,26 +7,42 @@ import {  useRecoilValue } from "recoil";
 import LayoutSort from "../../Components/layoutSort";
 import '../Media/media.scss'
 import { useMediaClickHandler } from "../../Utils/regularUtils";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Movies = () => {
 	const [movies, setMovies ] = useState<Movie[]>([])
 	const layout = useRecoilValue(layoutState)
 	const handleMediaClick = useMediaClickHandler()
+	const [page, setPage ] = useState(1)
 
-	useEffect(() => {
+	async function fetchData() {
+		const moviesList = await getMovies(page);
 		
-		async function fetchData() {
-		const moviesList = await getMovies();
 		const movieType = moviesList.map(type => ({
 			...type,
-			mediaType: 'movie'
-		}))
+			media_type: 'movie'
+		}));
+		setMovies(movieType);
+		
+	}
 
-			setMovies(movieType)
-		}
 	
-		fetchData()
-	}, []);	
+	useEffect(() => {
+			fetchData()				
+    }, []);
+
+
+	const fetchNextPage = async () => {
+		const nextPage = page + 1
+		setPage(nextPage)
+		const moviesList = await getMovies(nextPage);
+		const nextPageMovies = moviesList.map(movie => ({
+				...movie,
+				media_type: 'movie'
+			}))
+		setMovies(prevMovies => [ ...prevMovies, ...nextPageMovies])
+			
+	}
 
 	return (
 		<div className="media">
@@ -39,7 +55,7 @@ const Movies = () => {
 				<div 
 					className={layout ? 'poster-div' : 'poster-div-small'}
 					key={movie.id}
-					onClick={() => handleMediaClick(movie, movie.id, movie.mediaType)}>
+					onClick={() => handleMediaClick(movie, movie.id, movie.media_type)}>
 					<h5 className="fontwhite">{movie.title}</h5>
 
 							<img 
@@ -48,12 +64,25 @@ const Movies = () => {
 							alt={movie.title} /> 
 							
 							<div className='fontyellow media-card-text'>
-								<p className='uppercase'>{movie.mediaType}</p>
+								<p className='uppercase'>{movie.media_type}</p>
 								<p>{movie.release_date.substring(0,4)} </p>
 							</div>
 
 				</div>))}
+				<InfiniteScroll
+				dataLength={movies.length} 
+				next={fetchNextPage}
+				hasMore={true}
+				loader={<h4>Loading...</h4>}
+				endMessage={
+				<p style={{ textAlign: 'center', color: 'white' }}>
+				<b>Yay! You have seen it all</b>
+				</p>
+			} >
+			</InfiniteScroll>
+
 			</div>
+			
 		</div>
 	)
 }

@@ -18,9 +18,11 @@ export function useMediaClickHandler() {
 		setSelectedMedia(mediaDetails)
 
 		const actorDetails = await getMediaActors(id, mediaType )
+		const actorLength = actorDetails.cast.slice(0,5).map(actor => ({ ...actor }));
 
-		const actorLength = actorDetails.cast.slice(1,5);
-		setActors(actorLength)
+		setActors(actorLength);
+		console.log('Actors',actorLength)
+		
 	
 			if (!isClicked) {
 				setIsClicked(true)

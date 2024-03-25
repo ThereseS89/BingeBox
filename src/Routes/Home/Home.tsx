@@ -14,7 +14,7 @@ const Home = () => {
 	const [ trendingMediaDataState, setTrendingMediaDataState] = useRecoilState(movieDataState)
 	const layout = useRecoilValue(layoutState)
 
-
+	console.log('before fetch')
 	useEffect(() => {
 		
 		async function fetchData() {
@@ -24,6 +24,7 @@ const Home = () => {
 		}
 		fetchData()
 	},[]);
+	console.log('after fetch')
 
 	return (
 		<div className="home">

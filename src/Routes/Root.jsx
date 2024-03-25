@@ -4,7 +4,7 @@ import Footer from "../Components/Footer"
 import HomeOverlay from "../Components/HomeOverlay"
 import {useState, useEffect} from "react"
 import '../../src/index.scss'
-import HamburgerMenu from "../Components/Hamburgermenu"
+import NavBar from "../Components/NavBar"
 
 const Root = () => {
 	const [isOverlayVisible, setIsOverlayVisible]= useState(true)
@@ -31,9 +31,11 @@ const Root = () => {
 		{isOverlayVisible ? <HomeOverlay isOverlay={true}/> : null }
 		{!isOverlayVisible ? <Header /> : null }
 		<main>
-			<HamburgerMenu />
+			
+	
 			<Outlet />
 		</main>
+		<NavBar/>
 		{!isOverlayVisible ? <Footer /> : null }
 		</>
 	)

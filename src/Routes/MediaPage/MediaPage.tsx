@@ -18,16 +18,17 @@ const MediaPage = () => {
 	const [savedToList, setSavedToList] = useRecoilState(savedToListState)
 	const [watched, setWatched ] = useRecoilState(savedToWatchedState)
 	const [	windowSize , setWindowSize ] = useState(window.innerWidth)
-	const actors = useRecoilValue(actorsState)
+	const [actors, setActors] = useRecoilState(actorsState)
 	const selectedMedia = useRecoilValue(clickedMediaState)
 	const [type, setType ] = useState(false)
 	const location = useLocation()
 	const [ showMessagelist, setshowMessagelist ] = useState(false) 
 	const [ showMessage, setshowMessage ] = useState(false) 
-
-
+	
 
 	useEffect(() => {
+		
+
 		function calculateWindowSize() {
 			setWindowSize(window.innerWidth)
 		}
@@ -36,6 +37,7 @@ const MediaPage = () => {
 		return () => {
 			window.removeEventListener('resize' , calculateWindowSize)
 		}
+		
 	}, [location])
 
 	const ImageSize = windowSize > 1000 ? posterImage : landscapeImage;
@@ -118,7 +120,7 @@ const MediaPage = () => {
 			removeFromMyList(media.id)
 		}	
 
-		console.log('savedtoList:', savedToList)
+		
 	}
 
 	useEffect(() => {
@@ -133,8 +135,8 @@ const MediaPage = () => {
 	const goBack = () => {
 		window.history.go(-1)
 	}
-	console.log('watched:', watched)
-	console.log('saved:', savedToList)
+	
+
 	return (
 		<div className="card-container">
 
