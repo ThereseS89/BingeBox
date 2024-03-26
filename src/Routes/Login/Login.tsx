@@ -68,7 +68,7 @@ const Login = () => {
 					<p className="fontwhite">Emailadress</p>
 					
 					<input 
-						placeholder="email@emailname.com"
+						placeholder="email"
 						value={email}
 						onChange={handleEmailChange}
 						onBlur={handleEmailBlur}
@@ -82,7 +82,7 @@ const Login = () => {
 						onChange={(event) => setPassword(event.target.value)}
 						value={password} 
 						type="password"
-						placeholder="password123"
+						placeholder="lösenord"
 						required/> 
 				</div>
 				
