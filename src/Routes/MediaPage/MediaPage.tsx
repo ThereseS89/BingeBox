@@ -5,10 +5,9 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { watchedMediaState, myListState, savedToListState, clickedMediaState, actorsState, isLoggedInState, savedToWatchedState } from "../../Utils/atoms"
 import { landscapeImage, posterImage  } from "../../constants/imageconfig"
 import './mediapage.scss'
-import { postMediaMyList, postMediaWatchedList } from "../../APIFunctions/postMediaToList"
 import {  useLocation } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa";
-import {deleteMylistMedia , deleteWatchedMedia} from "../../APIFunctions/deleteMedia"
+import { addToWatched, addToMyList, removeFromMyList, removeFromWatchedList } from "../../Utils/regularUtils"
 
 
 const MediaPage = () => {
@@ -19,7 +18,7 @@ const MediaPage = () => {
 	const [watched, setWatched ] = useRecoilState(savedToWatchedState)
 	const [	windowSize , setWindowSize ] = useState(window.innerWidth)
 	const [actors, setActors] = useRecoilState(actorsState)
-	const selectedMedia = useRecoilValue(clickedMediaState)
+	const [selectedMedia, setSelectedMedia] = useRecoilState(clickedMediaState)
 	const [type, setType ] = useState(false)
 	const location = useLocation()
 	const [ showMessagelist, setshowMessagelist ] = useState(false) 
@@ -41,7 +40,7 @@ const MediaPage = () => {
 	}, [location])
 
 	const ImageSize = windowSize > 1000 ? posterImage : landscapeImage;
-
+	
 
 	const handleMarkAsWatched = (media) => {
 		const isSavedw = watched[media.id];
@@ -61,42 +60,6 @@ const MediaPage = () => {
 			setWatched({ ...watched, [media.id]: false });
 			removeFromWatchedList(media.id)
 			setwatchedMedia((oldList) => oldList.filter(item => item.id !== media.id ));
-		}
-	}
-
-	async function removeFromMyList(mediaId) {
-
-		try {
-			await deleteMylistMedia(mediaId)
-		} catch (error) {
-			console.error('Något gick fel, media inte borttagen')
-		}
-	}
-
-	async function removeFromWatchedList(mediaId) {
-
-		try {
-			await deleteWatchedMedia(mediaId)
-		} catch (error) {
-			console.error('Något gick fel, media inte borttagen')
-		}
-	}
-
-
-	async function addToWatched(media) {
-		try {
-			await postMediaWatchedList(media)
-		} catch (error) {
-			console.error('failed to add media to watchedList', error.message)
-		}
-	}
-	
-	async function addToMyList(media) {
-		try {
-			await postMediaMyList(media);
-			
-		} catch (error) {
-			console.error('failed to add media to myList', error.message)
 		}
 	}
 
@@ -124,11 +87,15 @@ const MediaPage = () => {
 	}
 
 	useEffect(() => {
-		if (selectedMedia?.seasons) {
-			setType(true) 
-		} else {
-			setType(false)
+		if (selectedMedia) {
+			const updateMedia = {
+				...selectedMedia,
+				media_type: selectedMedia.seasons ? 'tv' : 'movie'
+			};
+			setSelectedMedia(updateMedia)
+			setType(selectedMedia.seasons ? true : false) 
 		}
+		
 	}, []);
 
 	
@@ -163,7 +130,7 @@ const MediaPage = () => {
 						))}
 						</div>
 
-						<h6>{selectedMedia?.runtime || selectedMedia?.episode_run_time} MIN</h6> 
+						<h6>{selectedMedia?.runtime || selectedMedia?.episode_run_time} MIN</h6> <h6>{selectedMedia?.media_type}</h6>
 						<h6>{selectedMedia?.PremiereYear || selectedMedia?.first_air_date || selectedMedia?.release_date}</h6>
 					</div>
 

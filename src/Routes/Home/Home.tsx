@@ -1,6 +1,6 @@
 
 import { getTrendingMedia } from '../../APIFunctions/getTrendingMedia'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { posterImage, unavailable } from "../../constants/imageconfig";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { movieDataState, layoutState } from "../../Utils/atoms";
@@ -8,23 +8,34 @@ import "../Home/home.scss"
 import { useMediaClickHandler } from '../../Utils/regularUtils.js';
 import LayoutSort from '../../Components/layoutSort';
 
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 
 const Home = () => {
 	const handleMediaClick = useMediaClickHandler()
 	const [ trendingMediaDataState, setTrendingMediaDataState] = useRecoilState(movieDataState)
 	const layout = useRecoilValue(layoutState)
+	const [page, setPage ] = useState(1)
 
 	console.log('before fetch')
 	useEffect(() => {
 		
 		async function fetchData() {
-		const trendingMediaData = await getTrendingMedia();
+		const trendingMediaData = await getTrendingMedia(page);
 
 			setTrendingMediaDataState(trendingMediaData)
 		}
 		fetchData()
 	},[]);
 	console.log('after fetch')
+
+	const fetchNextPage = async () => {
+		const nextPage = page + 1
+		setPage(nextPage)
+		const nextPages = await getTrendingMedia(nextPage);
+		setTrendingMediaDataState(nextPages)
+			
+	}
 
 	return (
 		<div className="home">
@@ -53,6 +64,17 @@ const Home = () => {
 			
 				))}
 			</div>
+			<InfiniteScroll
+				dataLength={trendingMediaDataState.length} 
+				next={fetchNextPage}
+				hasMore={true}
+				loader={<h4 style={{color: 'white'}}>Loading...</h4>}
+				endMessage={
+				<p style={{ textAlign: 'center', color: 'white' }}>
+				<b>Yay! You have seen it all</b>
+				</p>
+			} >
+			</InfiniteScroll>
 			
 			
 			

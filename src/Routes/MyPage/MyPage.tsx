@@ -57,7 +57,7 @@ const MyPage = () => {
 					<div 
 						className="poster-div" 
 						key={media.id} 
-						onClick={() => handleMediaClick(media, media.id, media.media_type)}>
+						onClick={() => handleMediaClick(media, media.mediaId, media.media_type)}>
 
 						<img 
 							className="movie-img" 
@@ -88,7 +88,7 @@ const MyPage = () => {
 					<div 
 						className='poster-div' 
 						key={media.id} 
-						onClick={() => handleMediaClick(media, media.id, media.media_type)}>
+						onClick={() => handleMediaClick(media, media.mediaId, media.media_type)}>
 
 						<img 
 							src={posterImage + media.imageposter}	className="movie-img" />

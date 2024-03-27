@@ -26,6 +26,7 @@ export const handler = async (event) => {
                 shortDescription: requestBody.items[0].overview || '',
                 imageposter: requestBody.items[0].poster_path || '',
                 imagelandscape: requestBody.items[0].backdrop_path || '',
+                media_type: requestBody.items[0].media_type || '',
             };
 
             const getListResponse = await dynamo.send(

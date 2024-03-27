@@ -10,9 +10,13 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		margin-top: 10%;
+		margin-top: 3%;
 		gap: 2em;
 
+	}
+
+	form {
+		display: contents;
 	}
 
 	input {
@@ -33,6 +37,7 @@
 			border: none;
 			box-shadow: 5px 5px 5px rgb(65, 65, 65);
 			font-size: 1.3em;
+			align-self: center;
 		}
 
 }
