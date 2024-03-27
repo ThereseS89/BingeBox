@@ -1,9 +1,10 @@
+import { movieDbToken } from "../constants/constants";
 export async function getMediaDetails(id, mediaType) {
 	const options = {
 	method: 'GET',
 	headers: {
 		accept: 'application/json',
-		Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNWI2NWI4YWVmYWVmYmE3Nzk3MzIxMDk3MjYwNWRkOSIsInN1YiI6IjY1ZDlhMTFkNDJkODM3MDE3YjlhMjM3OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UH2BRGQIiJzm5RjjkD2SrdvptU7WTTcJb0xWJcURppI'
+		Authorization: `Bearer ${movieDbToken}`
 	}
   };
   
@@ -32,7 +33,7 @@ export async function getMediaActors(id, mediaType) {
 	method: 'GET',
 	headers: {
 		accept: 'application/json',
-		Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNWI2NWI4YWVmYWVmYmE3Nzk3MzIxMDk3MjYwNWRkOSIsInN1YiI6IjY1ZDlhMTFkNDJkODM3MDE3YjlhMjM3OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UH2BRGQIiJzm5RjjkD2SrdvptU7WTTcJb0xWJcURppI'
+		Authorization: `Bearer ${movieDbToken}`
 	}
   };
   
