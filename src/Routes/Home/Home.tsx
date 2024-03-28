@@ -41,6 +41,16 @@ const Home = () => {
 		<div className="home">
 			
 			<h3 className="uppercase barlowCon">Trendar idag</h3><div className='layout-set'><LayoutSort /></div>
+			<InfiniteScroll
+				dataLength={trendingMediaDataState.length} 
+				next={fetchNextPage}
+				hasMore={true}
+				loader={<h4 style={{color: 'white'}}>Loading...</h4>}
+				endMessage={
+				<p style={{ textAlign: 'center', color: 'white' }}>
+				<b>Yay! You have seen it all</b>
+				</p>
+			} >
 			<div className="media-container">
 				
 				{trendingMediaDataState !== null && trendingMediaDataState.map((movie) => ( 
@@ -64,18 +74,9 @@ const Home = () => {
 			
 				))}
 			
-			<InfiniteScroll
-				dataLength={trendingMediaDataState.length} 
-				next={fetchNextPage}
-				hasMore={true}
-				loader={<h4 style={{color: 'white'}}>Loading...</h4>}
-				endMessage={
-				<p style={{ textAlign: 'center', color: 'white' }}>
-				<b>Yay! You have seen it all</b>
-				</p>
-			} >
-			</InfiniteScroll>
 			</div>
+			</InfiniteScroll>
+			
 			
 			
 		</div>

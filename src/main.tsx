@@ -1,7 +1,7 @@
 import * as React  from 'react'
 import * as ReactDOM  from 'react-dom/client'
 import { RouterProvider } from "react-router-dom"
-import  router  from "./Routes/routeconfig.jsx"
+import  router  from "./Routes/routeconfig"
 import './index.scss'
 import { RecoilRoot } from 'recoil'
 

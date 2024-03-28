@@ -21,7 +21,7 @@ const TvShows = () => {
 		const tvShowList = await getTvShows(page);
 
 		// Lägger till en media_type
-		const tvShowType = tvShowList.map(show => ({
+		const tvShowType = tvShowList.map((show: object) => ({
 			...show,
 			media_type: 'tv'
 
@@ -42,7 +42,7 @@ const TvShows = () => {
 		setPage(nextPage)
 	
 			const tvShowList = await getTvShows(nextPage);
-			const tvShowType = tvShowList.map(show => ({
+			const tvShowType = tvShowList.map((show: object) => ({
 					...show,
 					media_type: 'tv'
 				}))
@@ -56,6 +56,16 @@ const TvShows = () => {
 		<div className="media">
 			<h3 className="uppercase barlowCon">TV-Serier</h3>
 		<div><LayoutSort /></div>
+		<InfiniteScroll
+				dataLength={tvShows.length} 
+				next={fetchNextPage}
+				hasMore={true}
+				loader={<h4>Loading...</h4>}
+				endMessage={
+				<p style={{ textAlign: 'center', color: 'white' }}>
+				<b>Yay! You have seen it all</b>
+				</p>
+			} >
 			<div className="media-container">
 				
 			{tvShows !== null && tvShows.map((tv) => ( 
@@ -77,18 +87,9 @@ const TvShows = () => {
 							</div>
 
 				</div>))}
-				<InfiniteScroll
-				dataLength={tvShows.length} 
-				next={fetchNextPage}
-				hasMore={true}
-				loader={<h4>Loading...</h4>}
-				endMessage={
-				<p style={{ textAlign: 'center', color: 'white' }}>
-				<b>Yay! You have seen it all</b>
-				</p>
-			} >
+				</div>
 			</InfiniteScroll>
-			</div>
+			
 		</div>
 	)
 }

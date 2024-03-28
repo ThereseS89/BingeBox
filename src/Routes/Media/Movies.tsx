@@ -18,7 +18,7 @@ const Movies = () => {
 	async function fetchData() {
 		const moviesList = await getMovies(page);
 		
-		const movieType = moviesList.map(type => ({
+		const movieType = moviesList.map((type: object) => ({
 			...type,
 			media_type: 'movie'
 		}));
@@ -36,7 +36,7 @@ const Movies = () => {
 		const nextPage = page + 1
 		setPage(nextPage)
 		const moviesList = await getMovies(nextPage);
-		const nextPageMovies = moviesList.map(movie => ({
+		const nextPageMovies = moviesList.map((movie: object) => ({
 				...movie,
 				media_type: 'movie'
 			}))
@@ -48,7 +48,16 @@ const Movies = () => {
 		<div className="media">
 			<h3 className="uppercase barlowCon">Filmer</h3>
 			<div><LayoutSort /></div>
-			
+			<InfiniteScroll
+				dataLength={movies.length} 
+				next={fetchNextPage}
+				hasMore={true}
+				loader={<h4>Loading...</h4>}
+				endMessage={
+				<p style={{ textAlign: 'center', color: 'white' }}>
+				<b>Yay! You have seen it all</b>
+				</p>
+			} >
 			<div className="media-container">
 			{movies !== null && movies.map((movie) => ( 
 
@@ -69,19 +78,10 @@ const Movies = () => {
 							</div>
 
 				</div>))}
-				<InfiniteScroll
-				dataLength={movies.length} 
-				next={fetchNextPage}
-				hasMore={true}
-				loader={<h4>Loading...</h4>}
-				endMessage={
-				<p style={{ textAlign: 'center', color: 'white' }}>
-				<b>Yay! You have seen it all</b>
-				</p>
-			} >
+			</div>
 			</InfiniteScroll>
 
-			</div>
+			
 			
 		</div>
 	)

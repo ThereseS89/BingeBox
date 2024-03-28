@@ -11,7 +11,7 @@ import LayoutSort from "../../Components/layoutSort"
 import { getTopRatedMovies } from "../../APIFunctions/getMovies"
 
 const Search = () => {
-	const [searching, setSearching] = useState(false);
+	const [, setSearching] = useState(false);
 	const [showResult, setShowResult ] = useState(false);
 	const [matchedMedia, setMatchedMedia ] = useState<Movie[]>([])
 	const layout = useRecoilValue(layoutState)
@@ -23,7 +23,7 @@ const Search = () => {
 		async function fetchData() {
 			const topratedMovies = await getTopRatedMovies()
 		
-			const movieType = topratedMovies.map(type => ({
+			const movieType = topratedMovies.map((type: object) => ({
 				...type,
 				media_type: 'movie'
 			}))
