@@ -21,3 +21,10 @@
 	color: $text;
 }
 
+@media (max-width: 440px) {
+	.position {
+		bottom: 3.5em;
+	}
+	
+}
+

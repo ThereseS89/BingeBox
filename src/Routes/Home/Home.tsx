@@ -63,7 +63,7 @@ const Home = () => {
 					</div>
 			
 				))}
-			</div>
+			
 			<InfiniteScroll
 				dataLength={trendingMediaDataState.length} 
 				next={fetchNextPage}
@@ -75,7 +75,7 @@ const Home = () => {
 				</p>
 			} >
 			</InfiniteScroll>
-			
+			</div>
 			
 			
 		</div>

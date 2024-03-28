@@ -1,33 +1,35 @@
 import { useState, useEffect } from "react"
 import { FaHeart, FaPlus,  } from "react-icons/fa"
 import { PiCheckFat, PiCheckFatFill } from "react-icons/pi"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { watchedMediaState, myListState, savedToListState, clickedMediaState, actorsState, isLoggedInState, savedToWatchedState } from "../../Utils/atoms"
 import { landscapeImage, posterImage  } from "../../constants/imageconfig"
 import './mediapage.scss'
 import {  useLocation } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa";
 import { addToWatched, addToMyList, removeFromMyList, removeFromWatchedList } from "../../Utils/regularUtils"
+import { Movie } from "../../types"
 
 
-const MediaPage = () => {
+const MediaPage = (media) => {
 	const isLoggedIn = useRecoilValue<boolean>(isLoggedInState) 
-	const [myList, setMyList] = useRecoilState(myListState)
-	const [ watchedMedia , setwatchedMedia ]  = useRecoilState(watchedMediaState)
+	const setMyList = useSetRecoilState(myListState)
+	const setwatchedMedia = useSetRecoilState(watchedMediaState)
 	const [savedToList, setSavedToList] = useRecoilState(savedToListState)
 	const [watched, setWatched ] = useRecoilState(savedToWatchedState)
 	const [	windowSize , setWindowSize ] = useState(window.innerWidth)
-	const [actors, setActors] = useRecoilState(actorsState)
+	const actors = useRecoilValue(actorsState)
 	const [selectedMedia, setSelectedMedia] = useRecoilState(clickedMediaState)
 	const [type, setType ] = useState(false)
 	const location = useLocation()
 	const [ showMessagelist, setshowMessagelist ] = useState(false) 
 	const [ showMessage, setshowMessage ] = useState(false) 
+	const [isWatched, setIsWatched ] = useState(false)
 	
 
 	useEffect(() => {
 		
-
+		setIsWatched(watched[media.id] || false)
 		function calculateWindowSize() {
 			setWindowSize(window.innerWidth)
 		}
@@ -37,20 +39,19 @@ const MediaPage = () => {
 			window.removeEventListener('resize' , calculateWindowSize)
 		}
 		
-	}, [location])
+	}, [location, media.id])
 
 	const ImageSize = windowSize > 1000 ? posterImage : landscapeImage;
 	
 
-	const handleMarkAsWatched = (media) => {
-		const isSavedw = watched[media.id];
+	const handleMarkAsWatched = (media: Movie) => {
 		
-		if(!isSavedw) {
+		
+		if(!isWatched) {
 			
 			setWatched({ ...watched, [media.id]: true });
 			addToWatched(media)
 			setwatchedMedia(list => [...list, media])
-			
 			setshowMessage(true)
 			setTimeout(() => {
 				setshowMessage(false);
@@ -61,13 +62,15 @@ const MediaPage = () => {
 			removeFromWatchedList(media.id)
 			setwatchedMedia((oldList) => oldList.filter(item => item.id !== media.id ));
 		}
+		setIsWatched(!isWatched)
 	}
 
-	const handleSaveToList = (media) => {
+	const handleSaveToList = (media: Movie) => {
 		
-		const isSaved = savedToList[media.id]
+		const isSaved = savedToList[selectedMedia.id]
+		console.log('isSaved?' , isSaved)
 		if(!isSaved) {
-			setSavedToList({ ...savedToList, [media.id]: true})
+			setSavedToList({ ...savedToList, [selectedMedia.id]: true})
 			addToMyList(media)
 			setMyList(prevList => [...prevList, media])
 			
@@ -78,7 +81,7 @@ const MediaPage = () => {
 						}, 1500);
 		
 		} else {
-			setSavedToList({ ...savedToList, [media.id]: false})
+			setSavedToList({ ...savedToList, [selectedMedia.id]: false})
 			setMyList((oldList) => oldList.filter(item => item.id !== media.id ));
 			removeFromMyList(media.id)
 		}	
