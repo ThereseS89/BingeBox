@@ -59,6 +59,18 @@
   
   }
 
+@media (max-width: 480px) {
+
+	.actorInfo-container{
+		
+		.flex {
+			display: block;
+		
+		}
+	}
+	
+	
+}
 
   @media (min-width: 1000px) {
 	.card-container {
