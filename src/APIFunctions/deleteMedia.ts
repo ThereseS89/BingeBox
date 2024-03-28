@@ -1,6 +1,6 @@
 import { url } from "../constants/constants"
 
-export const deleteMylistMedia = async (mediaId)  => {
+export const deleteMylistMedia = async (mediaId: string)  => {
 	try {
 		const token = localStorage.getItem('token')
 		if (!token) {
@@ -32,7 +32,7 @@ export const deleteMylistMedia = async (mediaId)  => {
 }
 
 
-export const deleteWatchedMedia = async (mediaId) => {
+export const deleteWatchedMedia = async (mediaId: string) => {
 	try {
 		const token = localStorage.getItem('token')
 		if (!token) {

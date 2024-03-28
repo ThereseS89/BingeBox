@@ -1,6 +1,7 @@
 import { url } from "../constants/constants";
+import { SelectedMedia } from "../types";
 
-export async function postMediaWatchedList(media) {
+export async function postMediaWatchedList(media: SelectedMedia) {
 	try {
 		const token = localStorage.getItem('token')
 		if (!token) {
@@ -27,13 +28,13 @@ export async function postMediaWatchedList(media) {
 			return data 
 		
 	} catch(error) {
-		console.error('Error posting data:', error.message);
+		console.error('Error posting data:');
 	}
 }
 
 
 
-export async function postMediaMyList(media) {
+export async function postMediaMyList(media: SelectedMedia) {
 	try {
 		const token = localStorage.getItem('token')
 		if (!token) {
@@ -62,7 +63,7 @@ export async function postMediaMyList(media) {
 			return data 
 		
 	} catch(error) {
-		console.error('Error posting data:', error.message);
+		console.error('Error posting data:');
 		throw error;
 	}
 }

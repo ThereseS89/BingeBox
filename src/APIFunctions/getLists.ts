@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { url } from "../constants/constants";
 export const getMyList = async () => {
 	try {

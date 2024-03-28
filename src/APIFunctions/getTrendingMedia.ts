@@ -1,5 +1,7 @@
 import { movieDbToken } from "../constants/constants";
-export async function getTrendingMedia(page) {
+
+
+export async function getTrendingMedia(page: number) {
 	const options = {
 	method: 'GET',
 	headers: {

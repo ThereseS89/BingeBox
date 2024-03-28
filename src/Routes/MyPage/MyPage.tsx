@@ -31,7 +31,7 @@ const MyPage = () => {
 				});
 				setSavedToList(updatedSavedToList);
 		
-			
+				// Uppdatera watched för filmer i watchedList
 				const updatedWatched: { [key: string]: boolean } ={};
 				watchedMedia.forEach(media => {
 					updatedWatched[media.id] = true;

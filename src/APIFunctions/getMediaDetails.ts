@@ -1,5 +1,6 @@
 import { movieDbToken } from "../constants/constants";
-export async function getMovies(page) {
+
+export async function getMediaDetails(id: string, mediaType: string) {
 	const options = {
 	method: 'GET',
 	headers: {
@@ -9,18 +10,18 @@ export async function getMovies(page) {
   };
   
   try {
-	const response = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-SV&page=${page}sort_by=popularity.desc`, options)
+	const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}&language=en-SV`, options)
 	if (!response.ok) {
-		throw new Error('Failed to fetch movies')
+		throw new Error('Failed to fetch trending movies')
 	}
 
 	const responseData = await response.json();
 	console.log(responseData)
-	if (!responseData.results || !Array.isArray(responseData.results)) {
+	if (!responseData) {
 		throw new Error('Invalid response Data')
 	}
 
-	return responseData.results
+	return responseData
   } catch (error) {
 	console.error('Error fetching trending movies: ', error)
 	return []
@@ -28,7 +29,7 @@ export async function getMovies(page) {
   
 }
 
-export async function getTopRatedMovies() {
+export async function getMediaActors(id: string, mediaType: string) {
 	const options = {
 	method: 'GET',
 	headers: {
@@ -38,18 +39,18 @@ export async function getTopRatedMovies() {
   };
   
   try {
-	const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US', options)
+	const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/credits?language=en-US`, options)
 	if (!response.ok) {
-		throw new Error('Failed to fetch toprated movies')
+		throw new Error('Failed to fetch actors')
 	}
 
 	const responseData = await response.json();
 	console.log(responseData)
-	if (!responseData.results || !Array.isArray(responseData.results)) {
+	if (!responseData) {
 		throw new Error('Invalid response Data')
 	}
 
-	return responseData.results
+	return responseData
   } catch (error) {
 	console.error('Error fetching trending movies: ', error)
 	return []

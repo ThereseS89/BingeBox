@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { isLoggedInState } from '../../Utils/atoms';
 
 const Login = () => {
-	const [isValidEmailState, setIsValidEmailState ] = useState(true)
+	const [, setIsValidEmailState ] = useState(true)
 	const [ email, setEmail ] = useState('')
 	const [ password, setPassword ] = useState('')
 	const [errorMessage, setErrorMessage] = useState('') 

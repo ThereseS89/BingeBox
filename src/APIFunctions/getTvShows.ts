@@ -1,6 +1,6 @@
 import { movieDbToken } from "../constants/constants";
 
-export async function getTvShows(page) {
+export async function getTvShows(page: number) {
 	const options = {
 	method: 'GET',
 	headers: {

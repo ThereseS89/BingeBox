@@ -1,6 +1,6 @@
 import { movieDbToken } from "../constants/constants";
 
-export async function getSearchResults(searchString) {
+export async function getSearchResults(searchString: string) {
 const options = {
 	method: 'GET',
 	headers: {

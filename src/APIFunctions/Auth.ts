@@ -1,5 +1,5 @@
 import { url } from "../constants/constants";
-export async function handleLoginAuth(email, password) {
+export async function handleLoginAuth(email: string, password: string) {
 
 	const response = await fetch(url + 'bingebox/login', {
 		method: 'POST',

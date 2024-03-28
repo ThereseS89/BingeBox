@@ -8,10 +8,10 @@ import './mediapage.scss'
 import {  useLocation } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa";
 import { addToWatched, addToMyList, removeFromMyList, removeFromWatchedList } from "../../Utils/regularUtils"
-import { Movie } from "../../types"
+import { SelectedMedia } from "../../types"
 
 
-const MediaPage = (media) => {
+const MediaPage = (media: SelectedMedia) => {
 	const isLoggedIn = useRecoilValue<boolean>(isLoggedInState) 
 	const setMyList = useSetRecoilState(myListState)
 	const setwatchedMedia = useSetRecoilState(watchedMediaState)
@@ -28,7 +28,7 @@ const MediaPage = (media) => {
 	
 
 	useEffect(() => {
-		
+		console.log('selectedMedia', selectedMedia)
 		setIsWatched(watched[media.id] || false)
 		function calculateWindowSize() {
 			setWindowSize(window.innerWidth)
@@ -44,7 +44,7 @@ const MediaPage = (media) => {
 	const ImageSize = windowSize > 1000 ? posterImage : landscapeImage;
 	
 
-	const handleMarkAsWatched = (media: Movie) => {
+	const handleMarkAsWatched = (media: SelectedMedia) => {
 		
 		
 		if(!isWatched) {
@@ -65,7 +65,7 @@ const MediaPage = (media) => {
 		setIsWatched(!isWatched)
 	}
 
-	const handleSaveToList = (media: Movie) => {
+	const handleSaveToList = (media: SelectedMedia) => {
 		
 		const isSaved = savedToList[selectedMedia.id]
 		console.log('isSaved?' , isSaved)

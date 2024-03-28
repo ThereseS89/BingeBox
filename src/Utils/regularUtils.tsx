@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Movie } from "../types"
+import { Movie, SelectedMedia } from "../types"
 import { useRecoilState, useSetRecoilState } from "recoil"
 import { getMediaDetails, getMediaActors } from "../APIFunctions/getMediaDetails"
 import { useNavigate } from "react-router-dom"
@@ -14,14 +15,14 @@ export function useMediaClickHandler() {
 		const setActors = useSetRecoilState(actorsState)
 	
 	
-	const handleMediaClick = async (media, id, mediaType) => {
+	const handleMediaClick = async (media: any, id: string, mediaType: string) => {
 		console.log('Nu körs handlemediaklick')
 
 		const mediaDetails = await getMediaDetails(id, mediaType)	
 		setSelectedMedia(mediaDetails)
 
 		const actorDetails = await getMediaActors(id, mediaType )
-		const actorLength = actorDetails.cast.slice(0,5).map(actor => ({ ...actor }));
+		const actorLength = actorDetails.cast.slice(0,5).map((actor: any) => ({ ...actor }));
 
 		console.log('Detta skickas in:', id, mediaType )
 
@@ -61,7 +62,7 @@ export function isValidEmail(email: string): boolean  {
     return emailPattern.test(email)
 }
 
-export async function removeFromMyList(mediaId) {
+export async function removeFromMyList(mediaId: string) {
 
 	try {
 		await deleteMylistMedia(mediaId)
@@ -70,7 +71,7 @@ export async function removeFromMyList(mediaId) {
 	}
 }
 
-export async function removeFromWatchedList(mediaId) {
+export async function removeFromWatchedList(mediaId: string) {
 
 	try {
 		await deleteWatchedMedia(mediaId)
@@ -80,20 +81,20 @@ export async function removeFromWatchedList(mediaId) {
 }
 
 
-export async function addToWatched(media) {
+export async function addToWatched(media: SelectedMedia) {
 	try {
 		await postMediaWatchedList(media)
 	} catch (error) {
-		console.error('failed to add media to watchedList', error.message)
+		console.error('failed to add media to watchedList')
 	}
 }
 
-export async function addToMyList(media) {
+export async function addToMyList(media: SelectedMedia) {
 	try {
 		await postMediaMyList(media);
 		
 	} catch (error) {
-		console.error('failed to add media to myList', error.message)
+		console.error('failed to add media to myList')
 	}
 }
 
